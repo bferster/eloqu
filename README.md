@@ -1,4 +1,4 @@
-# eloqu - Oral History Player
+# eloqú  - Oral History Player
 
 This tool is implelemented in Javascript. 
 
