@@ -4,21 +4,27 @@
 		<meta charset="utf-8">
 		<link REL="SHORTCUT ICON" HREF="img/favicon.ico">
 		<title>eloqú Oral History Player</title>
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.14.1/themes/smoothness/jquery-ui.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js"></script>
-		</head>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-		gtag('config', 'G-V480TXCX38');
-	</script>
-		<style>
+	</head>
+	<style>
 		 body { 			font-family:SegoeUI,Verdana,Geneva,sans-serif; font-size:14px; box-sizing:border-box; 
-							padding:0; margin:0; position:fixed; width:100%; 
+							padding:0; margin:0; position:fixed; width:100%; height:100vh; text-align:center
 							}
+		.divider {			position:absolute; height:calc(100vh - 106px); width:16px; top:32px; left:calc(50% - 8px); cursor:col-resize;
+							}
+		.script {			position:absolute; background-color: #fff; width:calc(50% - 24px); top:16px; left:16px;
+							height:calc(100% - 80px); border-radius:16px; border: 1px solid #999;
+							}
+		.media {			position:absolute; background-color: #eee; width:calc(50% - 24px); top:16px; left:calc(50% + 8px);
+							height:100%; height:calc(100% - 80px); border-radius:16px; border: 1px solid #999;
+							}
+		.control {			position:absolute; background-color: #eee; width:calc(100% - 32px); 
+							border-radius:80px; border: 1px solid #999; height:32px; top:calc(100% - 48px); left:16px;
+							}
+						
 		@font-face {  		font-family: SegoeUI; src: url(img/segoeui.ttf);   }
 
 		body ::-webkit-scrollbar { width: 9px; height:8px } 
@@ -28,8 +34,15 @@
 
 </style>
 <body>
+	<div id="main" class="main">
+		<div id="script" class="script">Script</div>
+		<div id="media"  class="media">Media</div>
+		<div id="divider" class="divider"></div>
+		<div id="control"  class="control">Control</div>
+	</div>
 
-	Hello
+
+
 
 <script>
 
@@ -39,9 +52,24 @@
 
 	var app=null;
 	
-	$(document).ready(function() {								           						// ON PAGE LOADED
-		$(window).on("keydown",(e)=>{ app.HandleKeyStroke(e); }); 									// HANDLE KEYPRESS
-	});
+	$(document).ready(()=> {								           						// ON PAGE LOADED
+
+		$(window).on("resize orientationchange", ()=>{ resize($("#divider").offset().left); })   // On window resize		
+		$("#divider").hover(																// On divider hover
+			()=>{$("#divider").css({"background-color":"#a4baec"});}, 						// Hilite
+			()=>{$("#divider").css({"background-color":""});}								// Normal
+			)
+		$("#divider").draggable({															// On divider drag
+			axis: "x",	containment:"parent",												// Contain
+			drag:(event, ui)=>{ resize(ui.offset.left); }									// Resize on drag
+			});
+		
+		function resize(l) {																// RESIZE PANES
+			$("#script").css("width",l-16);													// Script
+			$("#media").css({left:l+16,width:$(window).width()-l-32});						// Media
+			}		
+		});
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // APP
