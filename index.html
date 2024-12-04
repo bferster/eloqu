@@ -13,19 +13,44 @@
 		 body { 			font-family:SegoeUI,Verdana,Geneva,sans-serif; font-size:14px; box-sizing:border-box; 
 							padding:0; margin:0; position:fixed; width:100%; height:100vh; text-align:center
 							}
-		.divider {			position:absolute; height:calc(100vh - 106px); width:16px; top:32px; left:calc(50% - 8px); cursor:col-resize;
+		.divider {			position:absolute; height:calc(100vh - 144px); width:16px; top:32px; left:calc(50% - 8px); cursor:col-resize;
 							}
-		.script {			position:absolute; background-color: #fff; width:calc(50% - 24px); top:16px; left:16px;
-							height:calc(100% - 80px); border-radius:16px; border: 1px solid #999;
+		.script {			position:absolute; background-color: #fff; width:calc(50% - 36px); height:calc(100% - 108px);
+							 border-radius:16px; border: 6px solid #339999; top:16px; left:16px;
 							}
-		.media {			position:absolute; background-color: #eee; width:calc(50% - 24px); top:16px; left:calc(50% + 8px);
-							height:100%; height:calc(100% - 80px); border-radius:16px; border: 1px solid #999;
+		.media {			position:absolute; background-color: #eee; width:calc(50% - 36px);  height:calc(100% - 108px);
+							top:16px; left:calc(50% + 8px); border-radius:16px; border: 6px solid #f87498;
 							}
-		.control {			position:absolute; background-color: #eee; width:calc(100% - 32px); 
-							border-radius:80px; border: 1px solid #999; height:32px; top:calc(100% - 48px); left:16px;
+		.control {			position:absolute; background-color: #d2d9f3; width:calc(100% - 32px); height:48px; 
+							border-radius:16px; top:calc(100% - 64px); left:16px; border: 1px solid #999 
 							}
-						
+		#sliderhandle {		background:#339999; border-radius:16px;margin-top: -4px; outline:none; font-size:12px;
+							text-align:center; line-height: 12px;
+    						 }
+		.confirm {			position: absolute;  width: 300px; padding: 16px; left: calc(50% - 150px); top: calc(50% - 50px); user-select: none;	
+							border-radius: 8px; background-color: #fff; border: 1px solid #999; box-shadow: 4px 2px 12px 2px #aaa; 
+							}
+		.popup {			position: absolute;  width: auto; max-width:200px; padding: 12px; left: calc(50% - 100px); top: calc(66% - 50px);
+							border-radius: 8px; background-color: #eee; border: 1px solid #999; box-shadow: 4px 2px 12px 2px #aaa; 
+							font-size: 14px; text-align:center; display: none;
+							}
+		.bubble {			position:absolute;  width:auto; padding:12px; left:calc(50% - 150px); top:80px; width:300px; display: none;
+							border-radius:8px; background-color:#eee; border: 1px solid #999; font-size:16px; text-align:center; 
+							box-shadow: 4px 2px 4px 2px #aaa; 
+							}
+		.is {				border-radius:16px; padding:0 8px; width:250px; height: 24px;
+							border:1px solid #999; font-size: 13px;
+							}
+		.bs {				position:absolute; cursor: pointer; color:#f87498; text-align: center; border-radius: 16px; display: inline-block;
+							font-size: 18px; background-color: #fff; padding: 2px 8px 2px 8px; vertical-align:3px;user-select: none;
+							border: 2px solid #f87498;
+							} 
+		.icon {				cursor: pointer; position:absolute;
+							}
+
+					
 		@font-face {  		font-family: SegoeUI; src: url(img/segoeui.ttf);   }
+		:root  {			--maxvh: 100vh  }
 
 		body ::-webkit-scrollbar { width: 9px; height:8px } 
 		body ::-webkit-scrollbar-track { background: transparent; }
@@ -35,14 +60,25 @@
 </style>
 <body>
 	<div id="main" class="main">
-		<div id="script" class="script">Script</div>
-		<div id="media"  class="media">Media</div>
+		<div id="script" class="script"><br>Transcript panel
+			<img src="img/search.png" class="icon" style="left:16px;bottom:16px">
+			</div>
+		<div id="media"  class="media"><br>Media panel
+			<div id="showMedia" class="bs" style="right:16px;bottom:16px">Show Map</div>
+		</div>
 		<div id="divider" class="divider"></div>
-		<div id="control"  class="control">Control</div>
+		<div id="control"  class="control">
+			<img id="home" src="img/home.png" class="icon" style="left:20px;bottom:8px;width:32px">
+			<img id="play" src="img/playbut.png" class="icon" style="left:242px;bottom:8px;width:32px">
+			<div id="slider" class="icon" style="left:300px;bottom:20px;width:calc(100% - 376px);height:4px;background-color:#f87498">
+				<div id="sliderhandle" class="ui-slider-handle">
+					<div id="now" style="text-align:center;width:60px;margin-top:-14px;margin-left:-23px;font-size:11px"></div>
+				</div>
+			</div>
+			<div id="trt" class="icon" style="right:16px;bottom:15px"></div>
+
+		</div>
 	</div>
-
-
-
 
 <script>
 
@@ -54,9 +90,12 @@
 	
 	$(document).ready(()=> {								           						// ON PAGE LOADED
 
+		app=new App();																		// Load app
+
 		$(window).on("resize orientationchange", ()=>{ resize($("#divider").offset().left); })   // On window resize		
+			
 		$("#divider").hover(																// On divider hover
-			()=>{$("#divider").css({"background-color":"#a4baec"});}, 						// Hilite
+			()=>{$("#divider").css({"background-color":"#c7d2e9"});}, 						// Hilite
 			()=>{$("#divider").css({"background-color":""});}								// Normal
 			)
 		$("#divider").draggable({															// On divider drag
@@ -64,11 +103,35 @@
 			drag:(event, ui)=>{ resize(ui.offset.left); }									// Resize on drag
 			});
 		
+		$("#slider").slider({																// On slider drag
+	 		create: ()=>{ setTime(0) },														// On create
+     		slide: (event, ui) =>{ setTime(ui.value/100); }									// On slide
+			});
+
+		$("#play").on("click",()=>{															// On play/pause click
+			app.inPlay=!app.inPlay;															// Toggle flag
+			$("#play").attr("src",`img/${app.inPlay ? "pause" : "play"}but.png`);			// Flop images
+			});
+
+		$("#showMedia").on("click",()=>{													// On play/pause click
+			app.showMedia=!app.showMedia;													// Toggle flag
+			$("#showMedia").text(`Show ${app.showMedia ? "Media" : " Map"}`);				// Flop names
+			});
+
+
+		function setTime(pct) {																// GET TIMECODE FROM %
+			app.curTime=app.trt*pct;														// Set time
+			$("#trt").text(SecondsToTimecode(app.trt));										// Set end time
+			$("#now").text(SecondsToTimecode(app.curTime));									// Set now time
+			return SecondsToTimecode(app.curTime);											// Return tc		
+		}		
+
 		function resize(l) {																// RESIZE PANES
-			$("#script").css("width",l-16);													// Script
-			$("#media").css({left:l+16,width:$(window).width()-l-32});						// Media
-			}		
-		});
+			$("#script").css("width",l-28);													// Script
+			$("#media").css({left:l+16,width:$(window).width()-l-44});						// Media
+			}	
+
+	});
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -80,7 +143,11 @@ class App  {
 	constructor()   																			// CONSTRUCTOR
 	{
 		app=this;																					// App global pointer
-		}
+		this.curTime=0;																				// Current time in script
+		this.trt=100*50;																			// Script TRT
+		this.inPlay=false;																			// Playing flag	
+		app.showMedia=false;																			// Media flag	
+	}
 
 	HandleKeyStroke(e)																			// HANDLE KEYSTROKE
 	{
@@ -135,6 +202,32 @@ function trace(msg, p1, p2, p3, p4)																// CONSOLE
 		$("#pu-close").click(function() { $("#popupDiv").remove(); });									// Remove on click of close but
 		$("#popupDiv").fadeIn(500).delay(time ? time*1000 : 3000).fadeOut(500);							// Animate in and out		
 	}
+
+	function TimecodeToSeconds(timecode) 															// CONVERT TIMECODE TO SECONDS
+	{
+		let h=0,m=0;
+		let v=(""+timecode).split(":");																	// Split by colons
+		let s=v[0]																						// Add them
+	 	if (v.length == 2)																				// Just minutes, seconds
+			s=v[1],m=v[0];																				// Add them
+		else if (v.length == 3)																			// Hours, minutes, seconds
+			s=v[2],m=v[1],h=v[0];																		// Add them
+		return(Number(h*3600)+Number(m*60)+Number(s));													// Convert
+	}
+	
+	function SecondsToTimecode(secs) 																// CONVERT SECONDS TO TIMECODE
+	{
+		let str="",n;
+		n=Math.floor(secs/3600);																		// Get hours
+		if (n) str+=n+":";																				// Add to tc
+		n=Math.floor(secs/60);																			// Get mins
+		if (n < 10) str+="0";																			// Add leading 0
+		str+=n+":";																						// Add to tc
+		n=Math.floor(secs%60);																			// Get secs
+		if (n < 10) str+="0";																			// Add leading 0
+		str+=n;																							// Add to tc
+		return str;																						// Return timecode			
+	}	
 
 </script>
 </body>
