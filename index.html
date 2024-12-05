@@ -15,42 +15,45 @@
 		 body { 			font-family:SegoeUI,Verdana,Geneva,sans-serif; font-size:14px; box-sizing:border-box; 
 							padding:0; margin:0; position:fixed; width:100%; height:var(--maxvh); text-align:center
 							}
-		.divider {			position:absolute; height:calc(var(--maxvh) - 144px); width:16px; top:32px; left:calc(50% - 8px); cursor:col-resize;
+		.el-divider {		position:absolute; height:calc(var(--maxvh) - 144px); width:16px; top:32px; left:calc(50% - 8px); cursor:col-resize;
 							}
-		.script {			position:absolute; background-color: #fff; width:calc(50% - 36px); height:calc(100% - 108px);
-							 border-radius:16px; border: 6px solid #339999; top:16px; left:16px;
+		.el-script {		position:absolute; background-color: #fff; width:calc(50% - 36px); height:calc(100% - 108px);
+							border-radius:16px; border: 6px solid #339999; top:16px; left:16px; 
 							}
-		.media {			position:absolute; background-color: #eee; width:calc(50% - 36px);  height:calc(100% - 108px);
+		.el-rawscript {		height:calc(100% - 80px); overflow-x:hidden; overflow-y:scroll;  text-align:left; line-height: 1.5em;
+							margin:16px 4px 16px 16px; font-size:16px;
+						}
+		.el-media {			position:absolute; background-color: #eee; width:calc(50% - 36px);  height:calc(100% - 108px);
 							top:16px; left:calc(50% + 8px); border-radius:16px; border: 6px solid #f87498;
 							}
-		.control {			position:absolute; background-color: #d2d9f3; width:calc(100% - 32px); height:48px; 
+		.el-control {		position:absolute; background-color: #d2d9f3; width:calc(100% - 32px); height:48px; 
 							border-radius:16px; top:calc(100% - 64px); left:16px; border: 1px solid #999 
 							}
-		#sliderhandle {		background:#339999; border-radius:16px;margin-top: -4px; outline:none; font-size:12px;
+		#el-sliderhandle {	background:#339999; border-radius:16px;margin-top: -4px; outline:none; font-size:12px;
 							text-align:center; line-height: 12px;
-    						 }
-		.confirm {			position: absolute;  width: 300px; padding: 16px; left: calc(50% - 150px); top: calc(50% - 50px); user-select: none;	
+    						}
+		.el-confirm {		position: absolute; width: 300px; padding: 16px; left: calc(50% - 150px); top: calc(50% - 50px); user-select: none;	
 							border-radius: 8px; background-color: #fff; border: 1px solid #999; box-shadow: 4px 2px 12px 2px #aaa; 
 							}
-		.popup {			position: absolute;  width: auto; max-width:200px; padding: 12px; left: calc(50% - 100px); top: calc(66% - 50px);
+		.el-popup {			position: absolute; width: auto; max-width:200px; padding: 12px; left: calc(50% - 100px); top: calc(66% - 50px);
 							border-radius: 8px; background-color: #eee; border: 1px solid #999; box-shadow: 4px 2px 12px 2px #aaa; 
 							font-size: 14px; text-align:center; display: none;
 							}
-		.bubble {			position:absolute;  width:auto; padding:12px; left:calc(50% - 150px); top:80px; width:300px; display: none;
+		.el-bubble {		position:absolute; width:auto; padding:12px; left:calc(50% - 150px); top:80px; width:300px; display: none;
 							border-radius:8px; background-color:#eee; border: 1px solid #999; font-size:16px; text-align:center; 
 							box-shadow: 4px 2px 4px 2px #aaa; 
 							}
-		.is {				border-radius:16px; padding:0 8px; width:250px; height: 24px;
+		.el-is {			border-radius:16px; padding:0 8px; width:250px; height: 24px;
 							border:1px solid #999; font-size: 13px;
 							}
-		.bs {				position:absolute; cursor: pointer; color:#f87498; text-align: center; border-radius: 16px; display: inline-block;
+		.el-bs {			position:absolute; cursor: pointer; color:#f87498; text-align: center; border-radius: 16px; display: inline-block;
 							font-size: 18px; background-color: #fff; padding: 2px 8px 2px 8px; vertical-align:3px;user-select: none;
 							border: 2px solid #f87498;
 							} 
-		.icon {				cursor: pointer; position:absolute;
+		.el-icon {			cursor: pointer; position:absolute;
 							}
-
-					
+							
+							
 		@font-face {  		font-family: SegoeUI; src: url(img/segoeui.ttf);   }
 		:root  {			--maxvh: 100vh  }
 
@@ -61,23 +64,26 @@
 
 </style>
 <body>
-	<div id="main" class="main">
-		<div id="script" class="script"><br>Transcript panel
-			<img src="img/search.png" class="icon" style="left:16px;bottom:16px">
-			</div>
-		<div id="media"  class="media"><br>Media panel
-			<div id="showMedia" class="bs" style="right:16px;bottom:16px">Show Map</div>
+	<div id="el-main" class="el-main">
+		<div id="el-script" class="el-script">
+			<div id="el-rawscript" class="el-rawscript">Transcript</div>
+			<img src="img/search.png" class="el-icon" style="left:16px;bottom:16px">
+			<div id="el-showTrans" class="el-bs" style="right:16px;bottom:16px;border:2px solid #339999;color:#339999;">See Contents</div>
+
 		</div>
-		<div id="divider" class="divider"></div>
-		<div id="control"  class="control">
-			<img id="home" src="img/home.png" class="icon" style="left:20px;bottom:8px;width:32px">
-			<img id="play" src="img/playbut.png" class="icon" style="left:242px;bottom:8px;width:32px">
-			<div id="slider" class="icon" style="left:300px;bottom:20px;width:calc(100% - 376px);height:4px;background-color:#f87498">
-				<div id="sliderhandle" class="ui-slider-handle">
-					<div id="now" style="text-align:center;width:60px;margin-top:-14px;margin-left:-23px;font-size:11px"></div>
+		<div id="el-media"  class="el-media"><br>Media panel
+			<div id="el-showMedia" class="el-bs" style="right:16px;bottom:16px">Show Map</div>
+		</div>
+		<div id="el-divider" class="el-divider"></div>
+		<div id="el-control"  class="el-control">
+			<img id="el-home" src="img/home.png" class="el-icon" style="left:20px;bottom:8px;width:32px">
+			<img id="el-play" src="img/playbut.png" class="el-icon" style="left:242px;bottom:8px;width:32px">
+			<div id="el-slider" class="el-icon" style="left:300px;bottom:20px;width:calc(100% - 376px);height:4px;background-color:#f87498">
+				<div id="el-sliderhandle" class="ui-slider-handle">
+					<div id="el-now" style="text-align:center;width:60px;margin-top:-14px;margin-left:-23px;font-size:11px">00:00</div>
 				</div>
 			</div>
-			<div id="trt" class="icon" style="right:16px;bottom:15px"></div>
+			<div id="el-trt" class="el-icon" style="right:16px;bottom:15px"></div>
 
 		</div>
 	</div>
@@ -94,48 +100,51 @@
 	$(document).ready(()=> {								           						// ON PAGE LOADED
 		isMobile=navigator.userAgent.match(/(ipad|iphone|ipod|android)/i) ? true : false;	// Set mobile flag
 		document.documentElement.style.setProperty("--maxvh", window.innerHeight+"px");		// Set CSS var for IOS 100vh isssue
-			
 		app=new App();																		// Load app
-
-		$(window).on("resize orientationchange", ()=>{ resize($("#divider").offset().left); })   // On window resize		
+		app.AudioInit();																	// Init audio
+		let url=window.location.search.substring(1);						   				// Get query string
+		$(window).on("resize orientationchange",()=>{ resize($("#el-divider").offset().left); }) // ON RESIZE
+		
+		$("#el-transFile").on("change",(e)=>{												// ON FILE LOAD
+			app.MakeTranscript(e);															// Read file
+			$("#el-transFile").val("");														// Clear value		
+			});
 			
-		$("#divider").hover(																// On divider hover
-			()=>{$("#divider").css({"background-color":"#c7d2e9"});}, 						// Hilite
-			()=>{$("#divider").css({"background-color":""});}								// Normal
+		$("#el-divider").hover(																// ON DIVIDER HOVER
+			()=>{$("#el-divider").css({"background-color":"#c7d2e9"});}, 					// Hilite
+			()=>{$("#el-divider").css({"background-color":""});}							// Normal
 			)
-		$("#divider").draggable({															// On divider drag
+
+		$("#el-divider").draggable({														// ON DIVIDER DRAG
 			axis: "x",	containment:"parent",												// Contain
 			drag:(event, ui)=>{ resize(ui.offset.left); }									// Resize on drag
 			});
 		
-		$("#slider").slider({																// On slider drag
-	 		create: ()=>{ setTime(0) },														// On create
-     		slide: (event, ui) =>{ setTime(ui.value/100); }									// On slide
+		$("#el-slider").slider({															// ON TIME SLIDER
+			slide: (event, ui) =>{															// On drag																					
+				app.aud.currentTime=app.curTime=app.trt*ui.value/100; }						// Set time
+			});	
+
+		$("#el-play").on("click",()=>{														// ON PLAY CLICK
+			Sound("click");																	// Click
+			app.Play();																		// Toggle play
 			});
 
-		$("#play").on("click",()=>{															// On play/pause click
-			app.inPlay=!app.inPlay;															// Toggle flag
-			$("#play").attr("src",`img/${app.inPlay ? "pause" : "play"}but.png`);			// Flop images
-			Sound("click");																	// Click
-		});
-
-		$("#showMedia").on("click",()=>{													// On play/pause click
+		$("#el-showMedia").on("click",()=>{													// ON MEDIA CLICK
 			app.showMedia=!app.showMedia;													// Toggle flag
-			$("#showMedia").text(`Show ${app.showMedia ? "Media" : " Map"}`);				// Flop names
-			Sound("click");																	// Click
-		});
+			$("#el-showMedia").text(`Show ${app.showMedia ? "Media" : " Map"}`);			// Flop names
+			Sound("click");																	// Click9999
+			});
 
-
-		function setTime(pct) {																// GET TIMECODE FROM %
-			app.curTime=app.trt*pct;														// Set time
-			$("#trt").text(SecondsToTimecode(app.trt));										// Set end time
-			$("#now").text(SecondsToTimecode(app.curTime));									// Set now time
-			return SecondsToTimecode(app.curTime);											// Return tc		
-		}		
+		$("#el-showTrans").on("click",()=>{													// ON TRANS CLICK
+			app.showTrans=!app.showTrans;													// Toggle flag
+			$("#el-showTrans").text(`See ${app.showTrans ? "Transcript" : " Contents"}`);	// Flop names
+			Sound("click");																	// Click9999
+			});
 
 		function resize(l) {																// RESIZE PANES
-			$("#script").css("width",l-28);													// Script
-			$("#media").css({left:l+16,width:$(window).width()-l-44});						// Media
+			$("#el-script").css("width",l-28);												// Script
+			$("#el-media").css({left:l+16,width:$(window).width()-l-44});					// Media
 			document.documentElement.style.setProperty("--maxvh", window.innerHeight+"px");	// Set CSS var for IOS 100vh isssue
 		}	
 
@@ -151,11 +160,106 @@ class App  {
 	constructor()   																			// CONSTRUCTOR
 	{
 		app=this;																					// App global pointer
+		this.script=[];																				// Holds script lines
+		this.media=[];																				// Holds media lines
 		this.curTime=0;																				// Current time in script
-		this.trt=100*50;																			// Script TRT
+		this.trt=0;																					// Script TRT
 		this.inPlay=false;																			// Playing flag	
-		app.showMedia=false;																			// Media flag	
+		app.showMedia=false;																		// Media flag	
+		app.showTrans=false;																		// Transcript flag	
+		app.aud=null;																				// Audio player object
+		app.name="Natalie_Kaye";																	// Name of history
+		app.MakeScript();																			// Load and parse script
+		app.people=["INTERVIEWER", "KAYE",""];
 	}
+
+	AudioInit()																					// INIT AUDIO
+	{
+		app.audioFile="script/"+app.name+".mp3";													// Load audio file		
+		app.aud=new Audio(app.audioFile);															// Load audio
+	
+		app.aud.addEventListener("durationchange", ()=>{											// Loaded?
+			app.trt=app.aud.duration;																// Set TRT
+			$("#el-trt").text(SecondsToTimecode(app.trt));											// Set end time
+			});
+
+		app.aud.addEventListener("timeupdate", ()=>{											// Playing?
+			app.curTime=app.aud.currentTime;														// Set TRT
+			$("#el-slider").slider("option","value",this.curTime/this.trt*100);						// Move slider		
+			$("#el-now").text(SecondsToTimecode(app.curTime));										// Set now time
+			});
+	}
+
+	MakeScript()																				// CREATE SCRIPT FROM TRANSCRIPT
+	{
+		let i,d,o,start=0;
+		let str=`<div style="color:#339999;font-size:3em">An interview with<br><br><b>${this.name.replace(/_/g," ")}</b><br><br><br></div>`;
+			
+		this.script=[];	this.media=[];																// Start over
+		$.ajax({ url:"script/"+this.name+".txt",success:(s)=>{
+			s=s.replace(/<laugh>/gi,"[laugh]");														// Restucture laugh
+			s=s.replace(/<affirmative>./gi,"");														// Remove Affirmative.
+			s=s.replace(/<affirmative>/gi,"");														// Remove Affirmative
+			s=s.replace(/\r/g,"");																	// Remove CRS
+			s=s.split("\n");																		// Split into lines
+			for (i=0;i<s.length;++i) {																// For each line
+				o={s:start};																		// Blank object
+				if (s[i].match(/Speaker/i))	{														// A speaker line
+					d=s[i].match(/Speaker (\d).{4}(.{8}).{4}(.*)/i);								// Parse
+					o.e=TimecodeToSeconds(d[2]);													// Send end
+					o.who=d[1];																		// Set who
+					o.txt=app.AddMarkup(d[3]);														// Set text
+					start=o.e;																		// New start is now
+					str+=`<div style="margin-bottom:.5em" onclick="app.Goto(${start})"><b>${app.people[o.who]}:&nbsp;</b> ${o.txt}</div>`;// Add line			
+					this.script.push(o);															// Add to obj
+					}
+				else if (s[i].match(/Media/i)) {													// A media line
+					d=s[i].match(/Media\s*(.*?\s)(.*)/i);											// Parse				
+					o={s:start};																	// Blank object
+					o.type=d[1];																	// Type
+					o.params=d[2];																	// Params
+					this.media.push(o);																// Add to obj
+					str+=`<div style="margin-bottom:.5em" onclick="app.ShowMedia(${o.type})"><b>${app.people[o.who]}:</b> ${o.txt}</div>`;// Add line			
+				}
+				}
+			$("#el-rawscript").html(str);
+		}});
+	}
+
+	AddMarkup(str)																				// ADD MARKUP TO LINE
+	{
+		let s;
+		if (str.match(/<.*>/)) {																	// If a URL
+			let d=str.match(/<(.*)(http.*)>/);														// Get params
+			if (d) s=`<u style="cursor:pointer;color:blue" onclick="app.ShowMedia('URL','${d[2]}')">${d[1]}</u>`;	// Must be a URL, add link
+			else{
+				d=str.match(/<(.*)(@.*)>/);
+				if (d) s=`<b><u style="cursor:pointer;color:green" onclick="app.ShowMedia('MAP','${d[2]}')">${d[1]}</u></b>`;	// Must be a MAP, add link
+				else return str;																	// Invalid
+				}
+			str=str.replace(/<.*>/,s);																// Replace		
+			}	
+		return(str)	
+	}
+
+	Play(mode="toggle")																			// PLAY OR PAUSE
+	{
+		mode == "toggle" ? app.inPlay=!app.inPlay :	app.inPlay=mode									// Set flag
+		$("#el-play").attr("src",`img/${app.inPlay ? "pause" : "play"}but.png`);					// Flop images
+		if (app.inPlay)	app.aud.play();																// Play
+		else			app.aud.pause();															// Pause
+	}
+
+	ShowMedia(type, data)
+	{
+		trace(type,data)
+	}
+	
+	Goto(time)																					// GO TO A TIME
+	{
+		app.aud.currentTime=time;																	// Set audio
+	}
+
 
 	HandleKeyStroke(e)																			// HANDLE KEYSTROKE
 	{
