@@ -26,6 +26,8 @@
 		.el-media {			position:absolute; background-color: #eee; width:calc(50% - 36px);  height:calc(100% - 108px);
 							top:16px; left:calc(50% + 8px); border-radius:16px; border: 6px solid #f87498;
 							}
+		.el-mediaIF {		position:absolute; width:100%; height:100%; left:0; top:0; border-radius:16px;
+							}
 		.el-control {		position:absolute; background-color: #d2d9f3; width:calc(100% - 32px); height:48px; 
 							border-radius:16px; top:calc(100% - 64px); left:16px; border: 1px solid #999 
 							}
@@ -69,16 +71,17 @@
 			<div id="el-rawscript" class="el-rawscript">Transcript</div>
 			<img src="img/search.png" class="el-icon" style="left:16px;bottom:16px">
 			<div id="el-showTrans" class="el-bs" style="right:16px;bottom:16px;border:2px solid #339999;color:#339999;">See Contents</div>
-
 		</div>
-		<div id="el-media"  class="el-media"><br>Media panel
+		<div id="el-media"  class="el-media"><br>
+			<iframe id="el-mediaIF" class="el-mediaIF" frameborder=0 src=""></iframe>	
 			<div id="el-showMedia" class="el-bs" style="right:16px;bottom:16px">Show Map</div>
+			</div>
 		</div>
 		<div id="el-divider" class="el-divider"></div>
 		<div id="el-control"  class="el-control">
 			<img id="el-home" src="img/home.png" class="el-icon" style="left:20px;bottom:8px;width:32px">
-			<img id="el-play" src="img/playbut.png" class="el-icon" style="left:242px;bottom:8px;width:32px">
-			<div id="el-slider" class="el-icon" style="left:300px;bottom:20px;width:calc(100% - 376px);height:4px;background-color:#f87498">
+			<img id="el-play" src="img/playbut.png" class="el-icon" style="left:64px;bottom:8px;width:32px">
+			<div id="el-slider" class="el-icon" style="left:120px;bottom:20px;width:calc(100% - 190px);height:4px;background-color:#f87498">
 				<div id="el-sliderhandle" class="ui-slider-handle">
 					<div id="el-now" style="text-align:center;width:60px;margin-top:-14px;margin-left:-23px;font-size:11px">00:00</div>
 				</div>
@@ -89,6 +92,7 @@
 	</div>
 
 <script>
+
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 // MAIN 
@@ -105,7 +109,10 @@
 		let url=window.location.search.substring(1);						   				// Get query string
 		$(window).on("resize orientationchange",()=>{ resize($("#el-divider").offset().left); }) // ON RESIZE
 		
-		$("#el-transFile").on("change",(e)=>{												// ON FILE LOAD
+		$("body").keyup(function(e) {														// KEY DOWN HANDLER
+			});
+
+	 	$("#el-transFile").on("change",(e)=>{												// ON FILE LOAD
 			app.MakeTranscript(e);															// Read file
 			$("#el-transFile").val("");														// Clear value		
 			});
@@ -147,7 +154,6 @@
 			$("#el-media").css({left:l+16,width:$(window).width()-l-44});					// Media
 			document.documentElement.style.setProperty("--maxvh", window.innerHeight+"px");	// Set CSS var for IOS 100vh isssue
 		}	
-
 	});
 
 
@@ -170,7 +176,10 @@ class App  {
 		app.aud=null;																				// Audio player object
 		app.name="Natalie_Kaye";																	// Name of history
 		app.MakeScript();																			// Load and parse script
-		app.people=["INTERVIEWER", "KAYE",""];
+		app.ShowMedia("IMG","https://assets.isu.pub/document-structure/240724150510-1949f1d917c8af019638d1188096147d/v1/1602a96f03f428cf64634092f55c721f.jpeg?width=2160&quality=85%2C50");
+		app.Highlight(27)
+		app.people=["LS", "KAYE",""];
+		app.tpos=[];																				// Vertical position
 	}
 
 	AudioInit()																					// INIT AUDIO
@@ -193,7 +202,7 @@ class App  {
 	MakeScript()																				// CREATE SCRIPT FROM TRANSCRIPT
 	{
 		let i,d,o,start=0;
-		let str=`<div style="color:#339999;font-size:3em">An interview with<br><br><b>${this.name.replace(/_/g," ")}</b><br><br><br></div>`;
+		let str=`<div style="color:#339999;font-size:32px">An interview with <b>${this.name.replace(/_/g," ")}</b><hr></div>`;
 			
 		this.script=[];	this.media=[];																// Start over
 		$.ajax({ url:"script/"+this.name+".txt",success:(s)=>{
@@ -210,20 +219,18 @@ class App  {
 					o.who=d[1];																		// Set who
 					o.txt=app.AddMarkup(d[3]);														// Set text
 					start=o.e;																		// New start is now
-					str+=`<div style="margin-bottom:.5em" onclick="app.Goto(${start})"><b>${app.people[o.who]}:&nbsp;</b> ${o.txt}</div>`;// Add line			
+					str+=`<div id="el-L${start}" style="margin-bottom:.5em" onclick="app.Goto(${start})"><b>${app.people[o.who]}:&nbsp;</b> ${o.txt}</div>`;// Add line			
 					this.script.push(o);															// Add to obj
 					}
-				else if (s[i].match(/Media/i)) {													// A media line
-					d=s[i].match(/Media\s*(.*?\s)(.*)/i);											// Parse				
-					o={s:start};																	// Blank object
-					o.type=d[1];																	// Type
-					o.params=d[2];																	// Params
-					this.media.push(o);																// Add to obj
-					str+=`<div style="margin-bottom:.5em" onclick="app.ShowMedia(${o.type})"><b>${app.people[o.who]}:</b> ${o.txt}</div>`;// Add line			
-				}
 				}
 			$("#el-rawscript").html(str);
+$("#el-L27").css("background-color","#f9f9c0");
 		}});
+	}
+
+	Highlight(time)
+	{
+		$("#el-L"+time).css("background-color","#f9f9c0");
 	}
 
 	AddMarkup(str)																				// ADD MARKUP TO LINE
@@ -231,10 +238,14 @@ class App  {
 		let s;
 		if (str.match(/<.*>/)) {																	// If a URL
 			let d=str.match(/<(.*)(http.*)>/);														// Get params
-			if (d) s=`<u style="cursor:pointer;color:blue" onclick="app.ShowMedia('URL','${d[2]}')">${d[1]}</u>`;	// Must be a URL, add link
+			if (d) {																				// A URL in it
+				if (str.match(/\.jpg|\.jpeg|\.gif|\.png/))
+					s=`<b><p title="See image" style="margin:0 0 -3px;display:inline-block;cursor:pointer;color:red;margin-bottom:-3px;border:1px solid red;border-radius:12px;padding:0 8px" onclick="app.ShowMedia('IMG','${d[2]}')">${d[1]}</p></b>`;	// Must be a MAP, add link
+				else s=`<u title="Visit site" style="cursor:pointer;color:blue" onclick="app.ShowMedia('URL','${d[2]}')">${d[1]}</u>`;	// Must be a URL, add link
+				}	
 			else{
 				d=str.match(/<(.*)(@.*)>/);
-				if (d) s=`<b><u style="cursor:pointer;color:green" onclick="app.ShowMedia('MAP','${d[2]}')">${d[1]}</u></b>`;	// Must be a MAP, add link
+				if (d) s=`<b><p title="See map" style="margin:0 0 -3px 0;display:inline-block;cursor:pointer;color:green;border:1px solid green;border-radius:12px;padding:0 8px" onclick="app.ShowMedia('MAP','${d[2]}')">${d[1]}</p></b>`;	// Must be a MAP, add link
 				else return str;																	// Invalid
 				}
 			str=str.replace(/<.*>/,s);																// Replace		
@@ -250,20 +261,16 @@ class App  {
 		else			app.aud.pause();															// Pause
 	}
 
-	ShowMedia(type, data)
+	ShowMedia(type, params)
 	{
-		trace(type,data)
+		if (type.toUpperCase() == "URL") 		$("#el-mediaIF").attr("src",params);				// Show URL
+		else if (type.toUpperCase() == "MAP") 	$("#el-mediaIF").attr("src","map.htm?"+params);		// Show map
+		else if (type.toUpperCase() == "IMG") 	$("#el-mediaIF").attr("src","zoomer.htm?"+params);	// Show image
 	}
 	
 	Goto(time)																					// GO TO A TIME
 	{
 		app.aud.currentTime=time;																	// Set audio
-	}
-
-
-	HandleKeyStroke(e)																			// HANDLE KEYSTROKE
-	{
-		e.stopImmediatePropagation();																// Stop propagation
 	}
 		
 

@@ -1,7 +1,10 @@
+INTRO   An interview with Natalie Kaye    <https://assets.isu.pub/document-structure/240724150510-1949f1d917c8af019638d1188096147d/v1/1602a96f03f428cf64634092f55c721f.jpeg?width=2160&quality=85%2C50>
+TOC     1    An interview with Natalie Kaye 
+TOC     2    Early life
 Speaker 0    00:00:02    So your name is?
 Speaker 1    00:00:04    Natalie Hazard Kaye.  
-Speaker 0    00:00:06    And you were born?  
-Speaker 1    00:00:08    In <New York @latlon>? Mm-Hmm.  City in, um, October 16th, 1924.  
+Speaker 0    00:00:06    And you were born?
+Speaker 1    00:00:08    In <New York @40.823,-74.049,9> Mm-Hmm.  City in, um, October 16th, 1924.  
 Speaker 0    00:00:17    That's a while ago.  
 Speaker 0    00:00:18    A while ago. <laugh>. And when did you come to Middleburg?  
 Speaker 1    00:00:23    When I was eight years old.  
@@ -12,20 +15,22 @@ Speaker 1    00:01:06    <laugh>. It really was. <laugh>. It was a scary adventu
 Speaker 0    00:01:12    And where did you move to in the area when you came?  
 Speaker 1    00:01:15    When we first came, we were paying guests at Missy Saban.  
 Speaker 0    00:01:19    And I don't know where that is, would you,  
-Speaker 1    00:01:21    That's where, um, that's where Melissa Phipps and Birdie's <Place @latlon> is now.  
+Speaker 1    00:01:21    That's where, um, that's where Melissa Phipps and Birdie's <Place @38.985,-77.795,16> is now.  
 Speaker 0    00:01:29    What road is that on?
 Speaker 1    00:01:30    611  
 Speaker 0    00:01:32    And you stayed there for a while?  
 Speaker 1    00:01:36    We stayed there for I think a year or two, and then we moved into the house on Route 50 where Rufus Humphrey lived. Mm-Hmm.     
-Speaker 1    00:01:48    And, uh, of course we, all we wanted to do was play with horses. And so there it was.  
-Speaker 0    00:02:00    And you went to school here?  
+Speaker 1    00:01:48    And, uh, of course we, all we wanted to do was play with <horses https://assets.isu.pub/document-structure/240724150510-1949f1d917c8af019638d1188096147d/v1/fca7fbeb9f500bb09bead3d1cd6bed86.jpeg?width=2160&quality=85%2C50> and so there it was.  
+Speaker 0    00:02:00    And you went to school here?
+TOC     2    School 
 Speaker 1    00:02:02    I went to the <Hill School https://www.thehillschool.org>.
 Speaker 0    00:02:04    You did?  
 Speaker 1    00:02:04    And, uh, I, when I went, when I first went there, there were 30 children in the school. And then it dropped down to my last year before I went to boarding school, there were 15 children in the school. Wow. And I was in a class of one.  
 Speaker 0    00:02:21    You were the only child in your grade? Yes,  
 Speaker 1    00:02:24    <laugh>. But when I got to boarding school, I was up with all my classmates.  
 Speaker 0    00:02:30    So where did you go to off to boarding school?  
-Speaker 1    00:02:32    Miss Halls. Mm-Hmm.  in <Pittsfield, Mass @latlon>. Right. And, uh, that was good. Made lifelong friends there. Right. And, uh, then came back here, of course, for vacations. Mm-Hmm.  And then eventually my mother remarried and we lived at Stone Hedge, which is a farm near here. Mm-Hmm.  And, uh, well, we, we all had fun.
+Speaker 1    00:02:32    Miss Halls. Mm-Hmm.  in <Pittsfield, Mass @42.448,-73.255,14>. Right. And, uh, that was good. Made lifelong friends there. Right. And, uh, then came back here, of course, for vacations. Mm-Hmm.  
+Speaker 1    00:02:50    And then eventually my mother remarried and we lived at <Stone Hedge @39.01592,-77.74400,16>, which is a farm near here. Mm-Hmm.  And, uh, well, we, we all had fun.
 Speaker 0    00:03:11    Uh, who did your mother remarry?  
 Speaker 1    00:03:14    Bill Hubbert. Mm-Hmm.  And I had five step brothers and sisters. Suddenly.  
 Speaker 0    00:03:24    And you were already in high school by that point?  
@@ -39,6 +44,7 @@ Speaker 0    00:04:06    Did you spend time with your dad there?
 Speaker 1    00:04:08    No, I wasn't allowed to do that. My father was an alcoholic and that was a problem.  
 Speaker 0    00:04:16    So your mother had brought you down here and  
 Speaker 1    00:04:19    Yeah. And, uh,  
+TOC     2	 Fox hunting
 Speaker 1    00:04:24    And it turned out beautifully down here when that, those first years, Missy Saban was very much of a child per, she didn't have any children of her own, but she was wonderful with children. Mm-Hmm.  later on, she looked after the Phipps children, but, um, she, we had a, that first winter we had lots of snow and Missy said, you know what's really funny is coasting on trays, and we'll take 10 trays out there and coast. Well, that was so nice of her, and it was so fun. Right. And, and, uh, you know, I had a pony right away and Mm-Hmm.  and, and a dog. And so it was nice.  
 Speaker 0    00:05:13    And did you fox hunt when you were young?  
 Speaker 1    00:05:17    Yes. Mm-Hmm.   
@@ -47,31 +53,34 @@ Speaker 1    00:05:21    We hunted at those first years with Piedmont. Mm-Hmm.  
 Speaker 0    00:05:33    What was it like being in Middleburg when you were a child? What did you do?  
 Speaker 1    00:05:38    Well, every day when you got home from school, you got on your pony, Uhhuh , and rode and, uh, played on the farm. And, you know, we, we had, we visited each other. Mm-Hmm.  Well, I mean, our, my classmates, because in those early years I had classmates. Right. Um, and we'd take, you know, we'd take turns going to each other's houses and, but it usually involved riding.  
 Speaker 0    00:06:13    You would ride to your friend's house.  
-Speaker 1    00:06:14    Yeah. Well, later on, after we moved to, to the hou the, the next house, um, the McConnell's lived on the Zula Road, and Betty McConnell was my best friend. And every afternoon when we got home from school, we'd meet after lunch, we'd have lunch at home, and then we'd get on our ponies and we'd meet and we'd ride all afternoon.  
+Speaker 1    00:06:14    Yeah. Well, later on, after we moved to, to the next house, um, the McConnell's lived on the <Zula Road @38.91817,-77.78685,15> and Betty McConnell was my best friend. And every afternoon when we got home from school, we'd meet after lunch, we'd have lunch at home, and then we'd get on our ponies and we'd meet and we'd ride all afternoon.  
 Speaker 0    00:06:38    That sounds like a wonderful way to grow  
 Speaker 1    00:06:40    Up. It was fun. It really was.  
 Speaker 0    00:06:43    And there were, um, the people whose property you went through, talk about how, uh, people would, I guess, just let you ride on any property you wanted to.  
 Speaker 1    00:06:59    Oh, yes. Everybody knew each other. Mm-Hmm.  I mean, in those days it was such a tiny community, and they, and the, all the people from the north that had, that had moved here, had moved here for the hunting. And, uh, so it, you, you know, you, you went wherever you wanted to go and nobody expected you not to. So that was, that was all right. I mean, nobody, it, it never crossed anybody's mind, I don't think, to ask if they could go through. Well, 'cause it was taken for granted that she would. Right. And there were so few people. And the, the Route 50 was when we first came, route 50 was a dirt road. Was it from Middleburg? Not, not from Washington to Middleburg, but from Middleburg West. And then of course, very soon it got paved. Right. And the people that worked on the road were mostly, um, chain gangs. And they used to have, they used to have the prisoners all dressed up in stripes and, uh, and a gun at either end with a policeman. Different world.  
 Speaker 0    00:08:23    Right. Just getting that done.  
-Speaker 1    00:08:25    Yeah.  
+Speaker 1    00:08:25    Yeah.
+TOC     2    Town 
 Speaker 0    00:08:27    Did you go into town a lot?  
 Speaker 1    00:08:29    Not much, no. No.  
 Speaker 0    00:08:33    What, what did you do in the town of Middleburg when you were younger?  
-Speaker 1    00:08:39    You just did your shopping? I mean, the, there were just, there was a hardware store and a feed store and a drug store. And there were two drug stores, as a matter of fact. Mm-Hmm.  and, um, a couple of grocery stores. And that was it. None of these boutiquey kind of places. <laugh>.  
+Speaker 1    00:08:39    You just did your shopping? I mean, the, there were just, there was a <hardware store https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzOcH5S5Bh3ql_yz5HIt1wdWRDl0R8MMcg3g&s&.png> and a feed store and a drug store. And there were two drug stores, as a matter of fact. Mm-Hmm.  and, um, a couple of grocery stores. And that was it. None of these boutiquey kind of places. <laugh>.  
 Speaker 0    00:09:04    Did you go to Washington at all?  
 Speaker 1    00:09:06    No. Sometimes, but not often. Right.  
 Speaker 0    00:09:09    Your life was pretty much centered out here around  
-Speaker 1    00:09:12    Yeah, pretty much out here. We'd go in town. And the, and the thing was that you always met your family in front of the elevators, in the Mayflower Hotel.  
+Speaker 1    00:09:12    Yeah, pretty much out here. We'd go in town. And the, and the thing was that you always met your family in front of the elevators, in the <Mayflower Hotel https://www.southernspiritguide.org/wp-content/uploads/2018/03/LOC-Mayflower-Hotel-after-completion-Harris-Ewing.jpg>.  
 Speaker 0    00:09:22    Really? <laugh>.  
 Speaker 1    00:09:23    That was the meeting, that was the meeting place. The Mayflower was the only decent hotel in Washington then. Mm-Hmm.   
 Speaker 0    00:09:30    When you say your family, you mean you would've gone,  
 Speaker 1    00:09:34    Well if you were, you turned loose, um, when you were a little, I was a little bit older then. Right then. And you were meeting your mother or stepfather or brothers or stepsisters, you'd always meet in front of the elevators at the Mayflower <laugh>.  
+TOC     2    College 
 Speaker 0    00:09:55    And then did you go to university?  
 Speaker 1    00:09:58    I went to <Sarah Lawrence https://www.sarahlawrence.edu>.  
 Speaker 0    00:10:04    And what did you study?  
 Speaker 1    00:10:07    Theater.  
-Speaker 0    00:10:08    Oh, that's fun. <laugh>.  
-Speaker 1    00:10:10    But I didn't, I didn't graduate. I, I didn't, I got married and I worked, actually it was during the war, so I worked down, um, as a nurse's, as a Red Cross nurse's aide first when I was, I guess 16, 17 in the, um, Winchester Hospital. Hmm. And then I went to, what is now the Greenbriar in Whiteford Springs, but was then Ashford General Army Hospital.  
+Speaker 0    00:10:08    Oh, that's fun. <laugh>. 
+TOC     2    The war
+Speaker 1    00:10:10    But I didn't, I didn't graduate. I, I didn't, I got married and I worked, actually it was during the war, so I worked down, um, as a nurse's, as a Red Cross nurse's aide first when I was, I guess 16, 17 in the, um, <Winchester Hospital https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDXHFI7W2UcuL6pagMdn01dyzgK2hbZ1D_UA&s&.png>. Hmm. And then I went to, what is now the Greenbriar in Whiteford Springs, but was then Ashford General Army Hospital.  
 Speaker 0    00:10:43    Really? I didn't realize that. Yeah.  
 Speaker 1    00:10:46    And, and, uh, there were about a dozen of us. We were volunteers and they worked us hard and they, they housed us and they fed us. And, um, we worked the same hours as the nurses. Mm-Hmm.  eight hour days, eight hour shifts. And, and so I was there for a year, maybe a little over a year.  
 Speaker 0    00:11:13    And what were your responsibilities there?  
@@ -88,18 +97,19 @@ Speaker 0    00:12:26    Right.
 Speaker 1    00:12:32    Um, so  
 Speaker 0    00:12:33    Go ahead.  
 Speaker 1    00:12:35    That was the, the, there was a German, um, prisoner camp Right. Very close by. And they did, took care of the grounds and, and did some of the cooking. And they were mostly from the Africa Corps prisoners. And then the patients were all, for the most part, American soldiers. There were a few that were other, were other nationalities. And I don't know how come they were there, but they were, but they were fabulous boys. There were, there was one ward that had guys that had their spinal cord severed and they couldn't move. And you'd walk into that ward and honestly, they were absolutely amazing. They'd be laughing and joking with each other. And here are these young guys that were in such terrible shape, but they were just so brave. Mm-Hmm.  
-Speaker 0    00:13:47    , the people that they brought in, the German prisoners that, that they brought in. Do you, did you witness any of the interaction between them and the men that were there?  
+Speaker 0    00:13:47    The people that they brought in, the German prisoners that, that they brought in. Do you, did you witness any of the interaction between them and the men that were there?  
 Speaker 1    00:14:03    No, there wasn't any really. There, there wasn't any. No. They were, no, they were, they were, they worked, but they, nobody talked to them.  
 Speaker 0    00:14:17    And was that enforced or was that just kind of,  
 Speaker 1    00:14:22    I think, I think if you had, it would've been enforced, but nobody did so. Right. It was just the way it was. And  
 Speaker 0    00:14:31    Why, why was that? Did you get the sense of the emotion behind that?  
 Speaker 1    00:14:36    Well, it was just that they were, had been the enemy. They were perfectly nice looking boys. Right. But you just, um, didn't fraternize <laugh>.  
 Speaker 0    00:14:54    And what do you, what year was that, that you were there?  
+TOC     2    Dating 
 Speaker 1    00:14:59    I guess that was, uh, in the 43 maybe. Mm-Hmm.  42 3, because I was married in 45  
 Speaker 0    00:15:13    Mm-Hmm.  Then you went back to school after you were at the No. Then you didn't No.  
 Speaker 1    00:15:23    Didn't  
 Speaker 0    00:15:24    Came back here,  
-Speaker 1    00:15:25    Got married and then Yes. And well, we were living first in New York and then in outside Philadelphia. And then my husband got sick. He got tb and he had to be, um, separated from everybody in those days. They put people to bed for a year. Mm-Hmm.  And so we came back down here and he went to, into a place in Charlottesville, a TB place. And he was there for a year. Hmm.  
+Speaker 1    00:15:25    Got married and then Yes. And well, we were living first in New York and then in outside <Philadelphia @39.965,-75.162,11>. And then my husband got sick. He got tb and he had to be, um, separated from everybody in those days. They put people to bed for a year. Mm-Hmm.  And so we came back down here and he went to, into a place in Charlottesville, a TB place. And he was there for a year. Hmm.  
 Speaker 0    00:16:03    Uh, and what was your husband's name?  
 Speaker 1    00:16:05    Howard. Kaye.  
 Speaker 0    00:16:08    And where did you meet him?  
@@ -123,10 +133,11 @@ Speaker 0    00:18:52    Yeah.
 Speaker 1    00:18:54    Like that.  
 Speaker 0    00:18:56    Um, how many horses did they have there?  
 Speaker 1    00:19:01    I guess about 20.  
+TOC     2    Married 
 Speaker 0    00:19:04    And what did your husband do when he came back from, uh, from college or from the Navy? I guess  
 Speaker 1    00:19:11    From the war, really. He, well, he was still in the Navy when we were married. And then, um, he ended up running the training track here.  
 Speaker 0    00:19:23    Oh, really?  
-Speaker 1    00:19:26    For below the Paul Mellon then.  
+Speaker 1    00:19:26    For below the <Paul Mellon https://upload.wikimedia.org/wikipedia/en/7/7b/Mellon_paul.jpg> then.  
 Speaker 0    00:19:33    So he was in with the racing too?  
 Speaker 1    00:19:36    Yeah.  
 Speaker 0    00:19:36    Or just the manage  
@@ -176,6 +187,7 @@ Speaker 1    00:25:46    Oh, she didn't, she married. Oh, she didn't.
 Speaker 0    00:25:49    Oh, that's when she married. Yeah.  
 Speaker 1    00:25:51    And that was about 500 acres.  
 Speaker 0    00:25:53    500 acres. And what did they do with that land?  
+TOC     2    Stepfather
 Speaker 1    00:25:56    Well, he, pappi my stepfather had, uh, several brood mares and other horses and sheep and cows and, uh, farmed it, like to maintain the animals. And, uh, so, you know, that's the way it was.  
 Speaker 0    00:26:21    And was his primary job, uh, doing the animals or did he have another job?  
 Speaker 1    00:26:27    He didn't, he never had a job of any sort Right. That I ever knew of <laugh>. But there were, there was a stable man and a, and a helper for him and, and a farmer and a helper for him. And a, and then there was, what was his name? There was a sort of a handyman that could fix anything on the farm. And my stepfather liked to like, how to shop. He liked to make things, and so the handyman could use all his tools if he needed to. And it just sort of worked.  
@@ -189,9 +201,10 @@ Speaker 0    00:28:44    So the people that worked with him lived there on the f
 Speaker 1    00:28:48    Yeah. They all had their own houses. Mm-Hmm.   
 Speaker 0    00:28:50    Mm-Hmm.  And, um, what did he do in the war,  
 Speaker 1    00:28:55    Do you know? He was in the American Field Service. Hmm. And he met his wife there, what to be, and she was the mother of the children. And then she died. And then about two or three years after she died, he and my mother were married. Mm-Hmm.  
-Speaker 0    00:29:16     And had he grown up in Middleburg?  
-Speaker 1    00:29:19    No, he came from Cincinnati.  
+Speaker 0    00:29:16    And had he grown up in Middleburg?  
+Speaker 1    00:29:19    No, he came from <Cincinnati @39.096,-84.511,13>.  
 Speaker 0    00:29:20    Cincinnati Uhhuh. And do you know why he came here?  
+TOC     2    Hunting 
 Speaker 1    00:29:23    To hunt?  
 Speaker 0    00:29:24    To hunt? Mm-Hmm,  What, when you first started hunting, did you start right away when you were eight?  
 Speaker 1    00:29:35    Oh, well, yeah, but I was, I had a pony on Long Island where we lived  
@@ -224,8 +237,9 @@ Speaker 1    00:33:36    If something happens,
 Speaker 0    00:33:37    My grandfather, um, raised Morgan horses Oh, really? In Indiana. Uhhuh  And so my mother had grown up, uh, on a farm, and we all grew up riding, but there wasn't fox hunting there. No. So, you know, there was plenty of land to ride really fast, but it wasn't organized the way, you know, we would just go out, you know, my cousins and I would just go  
 Speaker 1    00:34:03    Out and have fun. Right. Yeah. Oh, great. So  
 Speaker 0    00:34:06    It wasn't organized like this. So I was, when I moved here, which was about 20 years ago, I was very keen to try it. And, uh, it just hasn't, it hasn't happened.  
+TOC     2    Rectortown
 Speaker 1    00:34:16    Where do you, where do you live?  
-Speaker 0    00:34:18    I live in Rectortown. Oh,  
+Speaker 0    00:34:18    I live in <Rectortown @38.921,-77.862,16>. Oh,  
 Speaker 1    00:34:19    You in the, in the village.  
 Speaker 0    00:34:20    In the village.  
 Speaker 1    00:34:22    Which house?  
@@ -270,19 +284,19 @@ Speaker 0    00:38:47    Were there as many different hunts when you first came?
 Speaker 1    00:38:53    More actually, because there were the cobbler, which are no longer in existence.  
 Speaker 0    00:38:57    Where were they?  
 Speaker 1    00:38:58    They were south of Warrenton. Mm-Hmm.  Well, I mean west of Warrenton, I, I should say not south west of Warrenton. Um, but otherwise the, the same number.  
-Speaker 0    00:39:15    So it was, there's Piedmont Middleburg, orange,  
+Speaker 0    00:39:15    So it was, there's Piedmont Middleburg, Orange,  
 Speaker 1    00:39:19    Orange County County, orange and Old Dominion.  
 Speaker 0    00:39:22    Blue Ridge.  
 Speaker 1    00:39:23    Blue Ridge,  
 Speaker 0    00:39:24    Snickers.  
-Speaker 1    00:39:26    Well, Snickers bill is new.  
+Speaker 1    00:39:26    Well, SnickersVille is new.  
 Speaker 0    00:39:27    Oh it is? Yeah.  
 Speaker 1    00:39:29    But, uh, that evolved just from a, from a war between the Middleburg Hunt and, and uh, dot Smith <laugh>. And so they started their own hunt on her property. 'cause she has, she had several thousand acres.  
 Speaker 0    00:39:50    What was the contention?  
 Speaker 1    00:39:54    I can't remember <laugh>. But there was some contention and she closed her land to the Middleburg Hunt. And so there it was.  
 Speaker 0    00:40:10    So people had to choose.  
-Speaker 1    00:40:12    Well, so then Greg Ryan sort of started the Snickers bill.  
-Speaker 0    00:40:25    The one time I did go out, I went out with Snickers bill because I was trying the horse. Oh, did you there because it seems to me that they thought it was an easier pack to start out with. Easier to ride,  
+Speaker 1    00:40:12    Well, so then Greg Ryan sort of started the SnickersVille.  
+Speaker 0    00:40:25    The one time I did go out, I went out with SnickersVille because I was trying the horse. Oh, did you there because it seems to me that they thought it was an easier pack to start out with. Easier to ride,  
 Speaker 1    00:40:39    Maybe. Yeah. Well, I think it is probably Mm-Hmm.  because there isn't so much to jump right  
 Speaker 0    00:40:46    There. Terrain's a little.  
 Speaker 1    00:40:47    Yeah. Um, but years ago, the, the, a bunch of Maryland people, we had a joint meet with, um, green Spring Valley in Maryland. Mm-Hmm.   
@@ -293,7 +307,8 @@ Speaker 1    00:41:40    Well, they tried to make us up all those great big Mary
 Speaker 0    00:41:53    Did you, um, did you have much to do with the Hill School when you came back? Did you, did you have children? Yeah,  
 Speaker 1    00:42:07    I have three boys. You have three boys. And they all went  
 Speaker 0    00:42:10    There. They all went there. What, what were their names?  
-Speaker 1    00:42:13    Howard, Woody and Billy.  
+Speaker 1    00:42:13    Howard, Woody and Billy.
+TOC     2    Hill School
 Speaker 0    00:42:20    And was the Hill School.  
 Speaker 1    00:42:23    It was bigger. Bigger. By that time it was, it was a lot. I mean, it wasn't as big as it is now, but it was a lot bigger. Right. And then, and when they went, they, it only went to the eighth grade when I went. You could have stayed through the 12th grade if you wanted to. Oh,  
 Speaker 0    00:42:39    Really? Yeah, it's still eighth grade. My son graduated from there last year. Where  
@@ -309,8 +324,7 @@ Speaker 1    00:43:10    Woody has his own company. Billy does commercial real e
 Speaker 0    00:43:17    <laugh>. And you said he's in Baltimore?  
 Speaker 1    00:43:26    Uh, Boston. Boston,  
 Speaker 0    00:43:28    Sorry. Um, did you ride at the training track when your husband was there?  
-Speaker 1    00:43:40    Um, no, I wasn't doing it then. Mm-Hmm.  
-Speaker 0    00:43:44      
+Speaker 1    00:43:40    Um, no, I wasn't doing it then. Mm-Hmm.       
 Speaker 1    00:43:46    There was a track, um, where Hickory Tree is.  
 Speaker 0    00:43:52    Right.  
 Speaker 1    00:43:53    And we used that track on work days on. Right. Gallop on normal days, we just gallop around the field. Mm-Hmm.   
@@ -319,9 +333,9 @@ Speaker 1    00:44:03    Oh, no, no, no. That was just fun.
 Speaker 0    00:44:07    Right. Um, by the time you were raising your children here, what was the difference? What had happened in Middleburg by then was the,  
 Speaker 1    00:44:21    It had grown  
 Speaker 0    00:44:22    Lot  
-Speaker 1    00:44:22    Grown. Everything had grown. Yeah. And there were more kids. Mm-Hmm. , which was good for the kids. Right. And we used to, you know, we used to have skating parties. We'd had ice sometime quite, quite often on ponds. And we'd have skating parties with the kids. And, um, we had pony club that they all did. And, um, I don't know, we seemed to entertain them. Mm-Hmm.  
-Speaker 0    00:44:54      
+Speaker 1    00:44:22    Grown. Everything had grown. Yeah. And there were more kids. Mm-Hmm. , which was good for the kids. Right. And we used to, you know, we used to have skating parties. We'd had ice sometime quite, quite often on ponds. And we'd have skating parties with the kids. And, um, we had pony club that they all did. And, um, I don't know, we seemed to entertain them. Mm-Hmm.        
 Speaker 1    00:44:56    And they'd come, some, they'd come and spend the night at our house or we'd go and our kids, one of our kids would go and spend the night with a friend. And there it was.  
+TOC     2    Married life
 Speaker 0    00:45:07    Where did you live when you were married?  
 Speaker 1    00:45:11    We lived at the, if you, you come in our driveway, if you look to the left, there's a house. Right. We lived in that house. Mm-Hmm.  for 25 years, I think.  
 Speaker 0    00:45:26    And so you had brought, you bought this property? Mm-Hmm.   
@@ -355,7 +369,7 @@ Speaker 0    00:48:46    Where Ben is. Yeah, I do know where that is. Yeah.
 Speaker 1    00:48:48    Well, that was their place. Mm-Hmm.  And then when he retired from the Middleburg hunt, he lived where, uh, woods once lives. Do you know where that is? Right at? Or the house as you come in my driveway on  
 Speaker 0    00:49:04    The Right. Right.  
 Speaker 1    00:49:06    And um, and then he lived there until he died, but he still owned the race course and, and all this land. Mm-Hmm.  
-Speaker 0    00:49:14     And he gave the race course to the, does the town own the race course?  
+Speaker 0    00:49:14    And he gave the race course to the, does the town own the race course?  
 Speaker 1    00:49:18    No, the hospital owns it. The Loudoun Hospital owns it.  
 Speaker 0    00:49:22    I didn't know that. Yeah.  
 Speaker 1    00:49:25    But it has an easement. It has an easement on it. They finally agreed to put an easement on it so that it can never be developed. Mm-Hmm.        
@@ -365,6 +379,7 @@ Speaker 0    00:49:50    Right.
 Speaker 1    00:49:51    I'm sure he'd let him.  
 Speaker 0    00:49:55    Yeah. And, uh, Scott Stein said he has permission to fish there, so he would Oh  
 Speaker 1    00:50:01    Yeah. Good.  
+TOC     2    Fly fishing 
 Speaker 0    00:50:01    He would take him too. So, yeah. Um, he goes on the map on the computer and decides where he wants to go fishing, and then he tries to meet the people to ask their permission <laugh>  
 Speaker 1    00:50:14    To go. Right. <laugh>, is he a fly fisherman?  
 Speaker 0    00:50:18    No, he's, he is a cast, but he's going to learn to fly fish. They went, he learned, um, do you know Brad Gable? Brad and Melinda Gable? Yeah. Brad is his godfather.  
@@ -386,10 +401,10 @@ Speaker 1    00:51:07    In Wyoming. Yeah. That's so fun.
 Speaker 0    00:51:09    Do you do that? Yeah.  
 Speaker 1    00:51:11    And I've been out there out west and done it. Yeah. Several times. And  
 Speaker 0    00:51:15    When did you start fishing?  
-Speaker 1    00:51:18    <laugh>? I don't know. I guess when I was born. Really? Yeah. So mother  
+Speaker 1    00:51:18    <laugh> I don't know. I guess when I was born. Really? Yeah. So mother  
 Speaker 0    00:51:23    Must have been very sporty.  
 Speaker 1    00:51:24    Well, I did a lot of things. Mm-Hmm. , a lot of bird shooting and a lot of fishing and, Mm-Hmm.  
-Speaker 0    00:51:32     Your mother must have been very sporty to get you into all this.  
+Speaker 0    00:51:32    Your mother must have been very sporty to get you into all this.  
 Speaker 1    00:51:37    No, she wasn't at all. She wasn't. Well, she did was Fox that, but she, um, but because of living here, you know, it was all available. Right. And if you had a bent in that direction, you did  
 Speaker 0    00:51:50    It. You could find someone who would  
 Speaker 1    00:51:51    Well, there were tons of people Yeah.  
@@ -398,12 +413,12 @@ Speaker 1    00:51:56    It is. So
 Speaker 0    00:52:00    I don't shoot, but I could any day  
 Speaker 1    00:52:03    <laugh>. Oh yeah. Well, there aren't any birds anymore. But we originally, white and I, when during the quail season, we would go three days a week at least. And every, every week of the season. But now there're aren't any left. Left.  
 Speaker 0    00:52:19    Where would you go?  
+TOC     2    Sold real estate
 Speaker 1    00:52:20    Well, I was, I did real estate for years. Oh really? And um, so I sold a lot of pretty big farms to various people, and I'd always ask them if I could shoot <laugh> and they'd let me. So it was sort of fun.  
 Speaker 0    00:52:38    And you could just hop around from place to place. Yeah.  
 Speaker 1    00:52:41    During the week. Well, well, usually we'd go to, I mean, there's, there was one down the other side of Marshall that was about 3000 acres. And we'd have the whole thing to cover in those days. I could walk <laugh>, but not anymore.  
 Speaker 0    00:52:59    And what happened to the bird population?  
-Speaker 1    00:53:02    I think there were herbicides and, and pesticides, all that stuff. Mm-Hmm.  
-Speaker 0    00:53:08      
+Speaker 1    00:53:02    I think there were herbicides and, and pesticides, all that stuff. Mm-Hmm.       
 Speaker 1    00:53:09    Did them in.  
 Speaker 0    00:53:11    Yeah. You see a pheasant every now and again, but  
 Speaker 1    00:53:15    Not well, we never had pheasants. They were put out by the state at one point. It didn't work. But we did have quail. Mm-Hmm.  And that was really fun. But now there aren't any,  
@@ -417,13 +432,12 @@ Speaker 0    00:53:48    Back up and running. Yeah. I wonder if you know her, sh
 Speaker 1    00:53:58    Two. It was Harry West Smith, wasn't it? Yeah. Yeah.  
 Speaker 0    00:54:01    Yeah. Did you read the book? No. Have you seen it? No. Oh, I should get you a copy. I bet you'd really enjoy it.  
 Speaker 1    00:54:07    I I would,  
-Speaker 0    00:54:09    Um,  
 Speaker 1    00:54:10    I knew Harry, Mr. Smith. Of course you did. Oh yeah. He was terrible old guy. <laugh> <laugh>. But he, I mean, he was so, oh, he was terrible. But he, he was so disagreeable, but he was, I mean, he certainly was a good hound man. Right.  
 Speaker 0    00:54:26    Why was he terrible?  
 Speaker 1    00:54:28    He was just so damn disagreeable. And he always was sort of saying nasty things to you about that you didn't look right or your horse wasn't right or something. And he wrote, which was absolutely astounded me. He wrote an obituary about my grandfather, which was glowing terms of what a great guy my grandfather was. And that was the first nice thing I've ever heard him say about anybody, <laugh>. So that kind of amazed me.  
 Speaker 0    00:55:01    Was that your mom's mom? Your mom's father or  
 Speaker 1    00:55:04    Your dad's? No, my father's.  
-Speaker 0    00:55:05    Your father's father. Yeah. And he was hazard.  
+Speaker 0    00:55:05    Your father's father. Yeah. And he was Hazard.  
 Speaker 1    00:55:08    Yeah.  
 Speaker 0    00:55:09    How did they know one another From New York, from  
 Speaker 1    00:55:12    Hunting and, Mm-Hmm.  shooting. I mean, not shooting, but, uh, hunting and racing and all that, which my and polo. Mm-Hmm.  Which my grandfather was instrumental in getting polo going in this country actually. Was he? Mm-Hmm.  He was the president of the American Polo Association for quite a few years.  
@@ -441,11 +455,11 @@ Speaker 0    00:56:04    Huh? Where were they?
 Speaker 1    00:56:06    I don't know where they were when he died. My father inherited the business and in 1928, he sold it to Sterling and put all the money in the stock exchange. Bought a seat on the New York Stock Exchange, and then 29 occurred. Wasn't very good.  
 Speaker 0    00:56:31    Right. What was this company called? The Salt Company? Do you know?  
 Speaker 1    00:56:43    I don't know what it was called before it was sold out to Sterling. I don't, I really don't know.  
-Speaker 0    00:56:47    And what was his name? Your, your grandfather?  
+Speaker 0    00:56:47    And what was his name? Your, your grandfather? 
+TOC     2    Grandfather Hazard 
 Speaker 1    00:56:50    William. A Hazard.  
-Speaker 0    00:56:56    H-A-Z-A-R-D.  
-Speaker 1    00:56:58    That's  
-Speaker 0    00:56:59    A great name. <laugh>.  
+Speaker 0    00:56:56    H-A-Z-A-R-D.       
+Speaker 0    00:56:59    That's A great name. <laugh>.  
 Speaker 1    00:57:02    <laugh>. Kind of a scary name.  
 Speaker 0    00:57:04    <laugh>. So you were the hazard girl? <laugh>. Yeah. <laugh>. Gosh,  
 Speaker 1    00:57:14    Raven is always on the wrong side of the door.   
@@ -454,8 +468,7 @@ Speaker 1    00:57:21    But she,  She's very good at night. She, luckily she sl
 Speaker 0    00:57:36    Well, she's beautiful. Have you had a lot of these dogs?  
 Speaker 1    00:57:39    Yeah, my grand, my grandmother had them and my mother had them, and I grew up with them. Mm-Hmm   And I've had, uh, I had one for  
 Speaker 1    00:57:49    Most of the time, but we've also always had labs as well, but Right. My last lab, actually, Kathy took her when she was 15. She, she needed to go to sleep and Kathy said, came and said, I'm taking her. You're not taking her. Mm-Hmm.  Which was so dear of her.  
-Speaker 0    00:58:09    Yeah. She's a lovely person. She  
-Speaker 1    00:58:11    Is.  
+Speaker 0    00:58:09    Yeah. She's a lovely person. She is
 Speaker 0    00:58:12    I think she's responsible for my son's fishing habit.  
 Speaker 1    00:58:15    Oh, is she?  
 Speaker 0    00:58:16    Yes. Because she would have him over and they would go, you know, she loves and go down to that pond and Yeah. She takes all the kids down there and then,  
@@ -477,7 +490,7 @@ Speaker 1    00:59:27    I don't think the Livingston's ever had a lot of money,
 Speaker 0    00:59:53    Yeah.  
 Speaker 1    00:59:54    Uh,  
 Speaker 0    00:59:55    Like a civil engineer?  
-Speaker 1    00:59:57    Well, not a, no, not a, no, I don't think that was right. He, desi he designed roads and stuff.  
+Speaker 1    00:59:57    Well, not a, no, not a, no, I don't think that was right. He designed roads and stuff.  
 Speaker 0    01:00:11    What was his name?  
 Speaker 1    01:00:12    Johnston Livingston.  
 Speaker 0    01:00:19    And, um,  
@@ -493,23 +506,21 @@ Speaker 0    01:00:50    They're the original PEs <laugh>. What else do you reme
 Speaker 1    01:01:01    Well, it was just a, uh, a very simple place with, uh, I don't know what else. Um, with nice people.  
 Speaker 0    01:01:25    Right. I think what, even just, you know, 25 years ago when I came here, it's in, in the country with all that has to offer. But people are interesting 'cause they're from all over. All over and they're very well educated. Yeah.  
 Speaker 1    01:01:44    Yeah. That's  
-Speaker 0    01:01:45    True. So it's kind of the best of both worlds. You're Yeah.  
-Speaker 1    01:01:48    You  
+Speaker 0    01:01:45    True. So it's kind of the best of both worlds. You're Yeah.   
 Speaker 0    01:01:48    Have people who are cosmopolitan in nature, and yet you have this lifestyle. Yeah.  
 Speaker 1    01:01:58    Yeah. We're lucky I think.  
 Speaker 0    01:02:00    Not a lot of places like it.  
 Speaker 1    01:02:01    No.  
 Speaker 0    01:02:03    So, except for going away to school, you've lived here since you were eight years old?  
-Speaker 1    01:02:08    Well, not really, because when we first married, we lived in New York. Mm-Hmm.  And then we lived outside Philadelphia, and then we came back here. But, um, every summer when I was growing up, we'd go back to Long Island. Mm-Hmm. , my mother's sister lived there, and we'd usually stay with her and, uh, see family. And all my father's, uh, sisters lived on Long Island too. Mm-Hmm.  
-Speaker 0    01:02:40      
+Speaker 1    01:02:08    Well, not really, because when we first married, we lived in New York. Mm-Hmm.  And then we lived outside Philadelphia, and then we came back here. But, um, every summer when I was growing up, we'd go back to Long Island. Mm-Hmm. , my mother's sister lived there, and we'd usually stay with her and, uh, see family. And all my father's, uh, sisters lived on Long Island too. Mm-Hmm.        
 Speaker 1    01:02:42    So, so, you know, but basically home was down here. Right.  
 Speaker 0    01:02:55    And did you, so you would ride and do all your sporty things in the summer too, up there?  
-Speaker 1    01:03:02    Not so much because we wouldn't be there long enough. Mm-Hmm.  
-Speaker 0    01:03:05      
+Speaker 1    01:03:02    Not so much because we wouldn't be there long enough. Mm-Hmm.    
 Speaker 1    01:03:07    No, we wouldn't, I wouldn't, it was the summer and, you know, we'd go to the beach and that sort of thing. Mm-Hmm.  Then  
+TOC     2    Married after the war
 Speaker 0    01:03:18    What did, uh, when did your husband come back from the war? Did he serve till it was over?  
 Speaker 1    01:03:25    Yeah. Oh yeah. Yeah. But he, he was still in the Navy after it was over. Mm-Hmm.  I mean, he was on terminal leave. Uh, we were married then. Mm-Hmm.  
-Speaker 0    01:03:37     You were, were you married during what year were you married?  
+Speaker 0    01:03:37    You were, were you married during what year were you married?  
 Speaker 1    01:03:45    We were married in 45 in New York.  
 Speaker 0    01:03:52    So the war was just over or  
 Speaker 1    01:03:54    It was, uh, no, it wasn't quite over, but Howard was out. I mean, he was still in, in the Navy, but he would, he was not serving, uh, anymore. He'd been on, he'd been in both oceans and he was on one, uh, one of those Jeep carriers that was hit by a kamikaze. And they, quite a few of them were trapped but below decks for quite a long time. Really? Before they got it back into Pearl, I guess, and to be fixed. Um, and then he was in the Atlantic on a, on a ship that, um, sunk the, the only Japanese submarine that was ever in the Atlantic attic. And they spotted it, and they sent word to his ship to go get it. And they did.  
@@ -531,6 +542,7 @@ Speaker 0    01:07:09    And when you came back here, it was when he had tv? Mm-
 Speaker 1    01:07:18    Well, yeah, basically. Mm-Hmm.  That was it. But in those days it was, they were really kept people in bed. And when he, when he first, when we were in Danbury, which is outside Philadelphia, we were living in a tenant house of a friend of his renting it. And, uh, all the sheets and towels and plates and for knives and forks, everything had to be boiled.  
 Speaker 0    01:07:50    Right.  
 Speaker 1    01:07:53    So we were, and you, you know, it was, it was sort of a tough time for a while.  
+TOC     2    Tuberculosis
 Speaker 0    01:08:01    Mm-Hmm.  Right. I bet it was. How does, how did he contract tuberculosis?  
 Speaker 1    01:08:08    I think that maybe it was when that kamikaze hit the ship. Really, they were trapped below for a long time, but they never really knew that, that was just a thought, a thought that might, might have caused it.  
 Speaker 0    01:08:24    So that was quite a long incubation period then  
@@ -548,6 +560,7 @@ Speaker 1    01:09:35    No, then he went back to, then he was in that place in 
 Speaker 0    01:09:39    For Right. But when he, when he was done with that, when he was better,  
 Speaker 1    01:09:42    Um, uh, not right away. 'cause he still had to rest a lot of the day. Right. And then he did after, after that, that got  
 Speaker 0    01:09:55    Better. Was it relatively easy to find a job in Middleburg?  
+TOC     2    Paul Mellon
 Speaker 1    01:10:00    No, I don't think so. But it just happened that a Jack Skinner was training for his stepfather was training for Paul Mellon and his mother told Paul Mellon that he needed a job. And so he gave him the training track to run. Mm-Hmm.   
 Speaker 0    01:10:23    So he worked for Paul Mellon?  
 Speaker 1    01:10:26    Yeah.  

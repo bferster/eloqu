@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<link REL="SHORTCUT ICON" HREF="img/favicon.ico">
+		<title>eloqú Map</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="lib/leaflet/leaflet.css" />
+		<script src="lib/leaflet/leaflet.js"></script>
+	
+	<style>	html, body { height: 100%; margin: 0; }</style>
+	</head>
+	<body>	
+		<div id="map" style="width:100%;height:100vh"></div>
+		<script>
+		let c=window.location.search.substring(2).split(",");
+		const map=L.map('map').setView([c[0],c[1]],c[2]);
+		L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19}).addTo(map);
+		map.on('move',(e)=>{
+			let c=map.getCenter();
+			let s=c.lat.toFixed(5);
+			s+=","+c.lng.toFixed(5);
+			s+=","+map.getZoom();
+			console.log(s)
+			});
+		</script>
+	</body>
+</html>
+
