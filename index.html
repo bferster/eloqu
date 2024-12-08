@@ -54,11 +54,9 @@
 							} 
 		.el-icon {			cursor: pointer; position:absolute;
 							}
-							
-							
+														
 		@font-face {  		font-family: SegoeUI; src: url(img/segoeui.ttf);   }
 		:root  {			--maxvh: 100vh  }
-
 		body ::-webkit-scrollbar { width: 9px; height:8px } 
 		body ::-webkit-scrollbar-track { background: transparent; }
 		body ::-webkit-scrollbar-thumb { border-radius:8px ;background:#a4baec }
@@ -74,13 +72,13 @@
 		</div>
 		<div id="el-media"  class="el-media"><br>
 			<iframe id="el-mediaIF" class="el-mediaIF" frameborder=0 src=""></iframe>	
-			<div id="el-showMedia" class="el-bs" style="right:16px;bottom:16px">Show Map</div>
+			<div id="el-showMedia" class="el-bs" style="right:16px;bottom:16px">Word Cloud</div>
 			</div>
 		</div>
 		<div id="el-divider" class="el-divider"></div>
 		<div id="el-control"  class="el-control">
 			<img id="el-home" src="img/home.png" class="el-icon" style="left:20px;bottom:8px;width:32px">
-			<img id="el-play" src="img/playbut.png" class="el-icon" style="left:64px;bottom:8px;width:32px">
+			<img id="el-play" src="img/playbut.png" class="el-icon" style="left:68px;bottom:8px;width:32px">
 			<div id="el-slider" class="el-icon" style="left:120px;bottom:20px;width:calc(100% - 190px);height:4px;background-color:#f87498">
 				<div id="el-sliderhandle" class="ui-slider-handle">
 					<div id="el-now" style="text-align:center;width:60px;margin-top:-14px;margin-left:-23px;font-size:11px">00:00</div>
@@ -108,7 +106,12 @@
 		app.AudioInit();																	// Init audio
 		let url=window.location.search.substring(1);						   				// Get query string
 		$(window).on("resize orientationchange",()=>{ resize($("#el-divider").offset().left); }) // ON RESIZE
-		
+	
+		$("#el-rawscript").scroll(()=>{														// ON DIVIDER DRAG
+			let pct=$("#el-rawscript")[0].scrollTop/$("#el-rawscript")[0].scrollHeight;		// % of scroll
+//			app.Highlight(pct*app.trt);														// Go there
+			});
+
 		$("body").keyup(function(e) {														// KEY DOWN HANDLER
 			});
 
@@ -129,7 +132,9 @@
 		
 		$("#el-slider").slider({															// ON TIME SLIDER
 			slide: (event, ui) =>{															// On drag																					
-				app.aud.currentTime=app.curTime=app.trt*ui.value/100; }						// Set time
+				app.aud.currentTime=app.trt*ui.value/100; 									// Set time
+				app.Highlight(app.aud.currentTime);											// Highlight
+				}
 			});	
 
 		$("#el-play").on("click",()=>{														// ON PLAY CLICK
@@ -138,9 +143,8 @@
 			});
 
 		$("#el-showMedia").on("click",()=>{													// ON MEDIA CLICK
-			app.showMedia=!app.showMedia;													// Toggle flag
-			$("#el-showMedia").text(`Show ${app.showMedia ? "Media" : " Map"}`);			// Flop names
-			Sound("click");																	// Click9999
+			app.ShowMedia("WORD","");
+			Sound("click");																	// Click
 			});
 
 		$("#el-showTrans").on("click",()=>{													// ON TRANS CLICK
@@ -168,18 +172,14 @@ class App  {
 		app=this;																					// App global pointer
 		this.script=[];																				// Holds script lines
 		this.media=[];																				// Holds media lines
-		this.curTime=0;																				// Current time in script
 		this.trt=0;																					// Script TRT
 		this.inPlay=false;																			// Playing flag	
-		app.showMedia=false;																		// Media flag	
 		app.showTrans=false;																		// Transcript flag	
 		app.aud=null;																				// Audio player object
 		app.name="Natalie_Kaye";																	// Name of history
 		app.MakeScript();																			// Load and parse script
-		app.ShowMedia("IMG","https://assets.isu.pub/document-structure/240724150510-1949f1d917c8af019638d1188096147d/v1/1602a96f03f428cf64634092f55c721f.jpeg?width=2160&quality=85%2C50");
-		app.Highlight(27)
-		app.people=["LS", "KAYE",""];
-		app.tpos=[];																				// Vertical position
+		app.people=[];																				// People
+		app.tPos=[];																				// Vertical position
 	}
 
 	AudioInit()																					// INIT AUDIO
@@ -193,62 +193,83 @@ class App  {
 			});
 
 		app.aud.addEventListener("timeupdate", ()=>{											// Playing?
-			app.curTime=app.aud.currentTime;														// Set TRT
-			$("#el-slider").slider("option","value",this.curTime/this.trt*100);						// Move slider		
-			$("#el-now").text(SecondsToTimecode(app.curTime));										// Set now time
-			});
+			$("#el-slider").slider("option","value",this.aud.currentTime/this.trt*100);				// Move slider		
+			$("#el-now").text(SecondsToTimecode(app.aud.currentTime));								// Set now time
+			app.Highlight(Math.floor(app.aud.currentTime));											// Set scroll
+		});
 	}
 
 	MakeScript()																				// CREATE SCRIPT FROM TRANSCRIPT
 	{
-		let i,d,o,start=0;
-		let str=`<div style="color:#339999;font-size:32px">An interview with <b>${this.name.replace(/_/g," ")}</b><hr></div>`;
-			
-		this.script=[];	this.media=[];																// Start over
+		let str="";
+		let i,d,o,start=0;		
+		this.script=[];	this.tPos=[]																// Start over		
 		$.ajax({ url:"script/"+this.name+".txt",success:(s)=>{
 			s=s.replace(/<laugh>/gi,"[laugh]");														// Restucture laugh
 			s=s.replace(/<affirmative>./gi,"");														// Remove Affirmative.
 			s=s.replace(/<affirmative>/gi,"");														// Remove Affirmative
 			s=s.replace(/\r/g,"");																	// Remove CRS
 			s=s.split("\n");																		// Split into lines
-			for (i=0;i<s.length;++i) {																// For each line
-				o={s:start};																		// Blank object
+				for (i=0;i<s.length;++i) {															// For each line
+				o={};																				// Blank object
 				if (s[i].match(/Speaker/i))	{														// A speaker line
 					d=s[i].match(/Speaker (\d).{4}(.{8}).{4}(.*)/i);								// Parse
-					o.e=TimecodeToSeconds(d[2]);													// Send end
+					o.s=TimecodeToSeconds(d[2]);													// Send end
 					o.who=d[1];																		// Set who
 					o.txt=app.AddMarkup(d[3]);														// Set text
-					start=o.e;																		// New start is now
-					str+=`<div id="el-L${start}" style="margin-bottom:.5em" onclick="app.Goto(${start})"><b>${app.people[o.who]}:&nbsp;</b> ${o.txt}</div>`;// Add line			
+					this.tPos.push(start);															// Add to time list
+					str+=`<div id="el-L${start}" style="margin-bottom:.5em" onclick="app.Goto(${o.s})"><b>${app.people[o.who]}:&nbsp;</b> ${o.txt}</div>`;// Add line			
 					this.script.push(o);															// Add to obj
-					}
+					start=o.s;																		// Then is now	
 				}
+				else if (s[i].match(/title/i))	{													// A title
+					let title=s[i].match(/<(h.*)>/i);
+					str+=`<div onclick="app.ShowMedia('IMG','${title[1]}')" 
+						style="text-align:center;color:#339999;font-size:24px"><br>An interview with <b>
+						${app.name.replace("_"," ")}</b><br><span style="font-size:16px">
+						${s[i].substring(8)}</span><br><br></div>`;
+						if (title)	app.ShowMedia("IMG",title[1]);
+					}
+				else if (s[i].match(/people  /i))	{												// People labels
+					app.people=s[i].substring(7).split(",");										// Get
+					}
+			}	
 			$("#el-rawscript").html(str);
-$("#el-L27").css("background-color","#f9f9c0");
 		}});
 	}
 
-	Highlight(time)
+	Highlight(time)																				// HIGHTLIGHT CURRENT LINE
 	{
-		$("#el-L"+time).css("background-color","#f9f9c0");
+		let i;
+		for (i=0;i<this.tPos.length;++i)	if (this.tPos[i] >= time) break;						// Find current line
+		if (i == this.tPos.length)	return;															// Not found
+		$("[id^=el-L]").css("background-color","");													// Clear all
+		let y=$("#el-L"+this.tPos[i-1]).offset().top+$("#el-rawscript")[0].scrollTop;				// Position in script
+		let r=y/$("#el-rawscript")[0].scrollHeight;													// % in script
+		$("#el-rawscript").scrollTop(r*$("#el-rawscript")[0].scrollHeight-$("#el-script").height()/2+32);	// Scroll
+		$("#el-L"+this.tPos[i-1]).css("background-color","#f9f9c0");								// Highlight current line
 	}
 
 	AddMarkup(str)																				// ADD MARKUP TO LINE
 	{
-		let s;
-		if (str.match(/<.*>/)) {																	// If a URL
-			let d=str.match(/<(.*)(http.*)>/);														// Get params
-			if (d) {																				// A URL in it
-				if (str.match(/\.jpg|\.jpeg|\.gif|\.png/))
-					s=`<b><p title="See image" style="margin:0 0 -3px;display:inline-block;cursor:pointer;color:red;margin-bottom:-3px;border:1px solid red;border-radius:12px;padding:0 8px" onclick="app.ShowMedia('IMG','${d[2]}')">${d[1]}</p></b>`;	// Must be a MAP, add link
-				else s=`<u title="Visit site" style="cursor:pointer;color:blue" onclick="app.ShowMedia('URL','${d[2]}')">${d[1]}</u>`;	// Must be a URL, add link
-				}	
-			else{
-				d=str.match(/<(.*)(@.*)>/);
-				if (d) s=`<b><p title="See map" style="margin:0 0 -3px 0;display:inline-block;cursor:pointer;color:green;border:1px solid green;border-radius:12px;padding:0 8px" onclick="app.ShowMedia('MAP','${d[2]}')">${d[1]}</p></b>`;	// Must be a MAP, add link
-				else return str;																	// Invalid
+		let i,s,g,d;
+		if (g=str.match(/<(.*?)>/g)) {																// If a URL(s)
+			for (i=0;i<g.length;++i) {
+				d=g[i].match(/<(.*)(http.*)>/);														// Get params
+				if (d) {																			// A URL in it
+					if (g[i].match(/\.jpg|\.jpeg|\.gif|\.png/)) 
+						s=`<b><p title="See image" style="margin:0 0 -3px;display:inline-block;cursor:pointer;color:#990000;margin-bottom:-3px;border:1px solid #990000;border-radius:12px;padding:0 8px" onclick="app.ShowMedia('IMG','${d[2]}')">${d[1]}</p></b>`;	// Must be a MAP, add link
+					else s=`<b><p title="See site" style="margin:0 0 -3px;display:inline-block;cursor:pointer;color:#000099;margin-bottom:-3px;border:1px solid #000099;border-radius:12px;padding:0 8px" onclick="app.ShowMedia('URL','${d[2]}')">${d[1]}</p></b>`;	// Must be a MAP, add link
+
+					
+					}	
+				else{
+					d=g[i].match(/<(.*)(@.*)>/);
+					if (d) 	s=`<b><p title="See map" style="margin:0 0 -3px 0;display:inline-block;cursor:pointer;color:#009900;border:1px solid #009900;border-radius:12px;padding:0 8px" onclick="app.ShowMedia('MAP','${d[2]}')">${d[1]}</p></b>`;	// Must be a MAP, add link
+					else 	return str;																// Invalid
+					}
+				str=str.replace(g[i],s);															// Replace		
 				}
-			str=str.replace(/<.*>/,s);																// Replace		
 			}	
 		return(str)	
 	}
@@ -266,13 +287,13 @@ $("#el-L27").css("background-color","#f9f9c0");
 		if (type.toUpperCase() == "URL") 		$("#el-mediaIF").attr("src",params);				// Show URL
 		else if (type.toUpperCase() == "MAP") 	$("#el-mediaIF").attr("src","map.htm?"+params);		// Show map
 		else if (type.toUpperCase() == "IMG") 	$("#el-mediaIF").attr("src","zoomer.htm?"+params);	// Show image
+		else if (type.toUpperCase() == "WORD") 	$("#el-mediaIF").attr("src","wordcloud.htm?"+params);	// Show wordcloud
 	}
 	
 	Goto(time)																					// GO TO A TIME
 	{
-		app.aud.currentTime=time;																	// Set audio
-	}
-		
+		if (!app.inPlay)	app.aud.currentTime=time;												// Set audio
+	}		
 
 }	// App class closure
 
@@ -324,29 +345,20 @@ function trace(msg, p1, p2, p3, p4)																// CONSOLE
 
 	function TimecodeToSeconds(timecode) 															// CONVERT TIMECODE TO SECONDS
 	{
-		let h=0,m=0;
-		let v=(""+timecode).split(":");																	// Split by colons
-		let s=v[0]																						// Add them
-	 	if (v.length == 2)																				// Just minutes, seconds
-			s=v[1],m=v[0];																				// Add them
-		else if (v.length == 3)																			// Hours, minutes, seconds
-			s=v[2],m=v[1],h=v[0];																		// Add them
-		return(Number(h*3600)+Number(m*60)+Number(s));													// Convert
+		const [hours,minutes,seconds]=timecode.split(":").map(Number);									// Get parts
+  		return hours*3600+minutes*60+seconds;															// Sum and return
 	}
 	
-	function SecondsToTimecode(secs) 																// CONVERT SECONDS TO TIMECODE
-	{
-		let str="",n;
-		n=Math.floor(secs/3600);																		// Get hours
-		if (n) str+=n+":";																				// Add to tc
-		n=Math.floor(secs/60);																			// Get mins
-		if (n < 10) str+="0";																			// Add leading 0
-		str+=n+":";																						// Add to tc
-		n=Math.floor(secs%60);																			// Get secs
-		if (n < 10) str+="0";																			// Add leading 0
-		str+=n;																							// Add to tc
-		return str;																						// Return timecode			
-	}	
+	function SecondsToTimecode(seconds) 															// CONVERT SECONDS TO TIMECODE
+	{					
+		let str="";
+		const minutes=Math.floor((seconds%3600)/60);													// Get minutes
+  		const remainingSeconds=Math.floor(seconds%60);													// Seconds
+		if (seconds > 3600)	str=Math.floor(seconds/3600)+":";											// If hours, ad
+		str+=minutes.toString().padStart(2,'0')+":";													// Add mins
+		str+=remainingSeconds.toString().padStart(2,'0');												// Add seconds
+		return str;																						// Return timecode
+		}	
 
 </script>
 </body>

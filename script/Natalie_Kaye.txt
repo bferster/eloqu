@@ -1,6 +1,7 @@
-INTRO   An interview with Natalie Kaye    <https://assets.isu.pub/document-structure/240724150510-1949f1d917c8af019638d1188096147d/v1/1602a96f03f428cf64634092f55c721f.jpeg?width=2160&quality=85%2C50>
 TOC     1    An interview with Natalie Kaye 
 TOC     2    Early life
+People  LS,KAYE
+Title   Interviewed by Lydia Strohl<https://assets.isu.pub/document-structure/240724150510-1949f1d917c8af019638d1188096147d/v1/1602a96f03f428cf64634092f55c721f.jpeg?width=2160&quality=85%2C50>
 Speaker 0    00:00:02    So your name is?
 Speaker 1    00:00:04    Natalie Hazard Kaye.  
 Speaker 0    00:00:06    And you were born?
@@ -29,7 +30,7 @@ Speaker 1    00:02:04    And, uh, I, when I went, when I first went there, there
 Speaker 0    00:02:21    You were the only child in your grade? Yes,  
 Speaker 1    00:02:24    <laugh>. But when I got to boarding school, I was up with all my classmates.  
 Speaker 0    00:02:30    So where did you go to off to boarding school?  
-Speaker 1    00:02:32    Miss Halls. Mm-Hmm.  in <Pittsfield, Mass @42.448,-73.255,14>. Right. And, uh, that was good. Made lifelong friends there. Right. And, uh, then came back here, of course, for vacations. Mm-Hmm.  
+Speaker 1    00:02:32    <Miss Halls https://cdn.sanity.io/images/yln0jo77/production/244716c763850eb9a553d9b73e1e2d5b628d3977-1002x721.jpg?w=800&h=576&fit=crop>. Mm-Hmm.  in <Pittsfield, Mass @42.448,-73.255,14>. Right. And, uh, that was good. Made lifelong friends there. Right. And, uh, then came back here, of course, for vacations. Mm-Hmm.  
 Speaker 1    00:02:50    And then eventually my mother remarried and we lived at <Stone Hedge @39.01592,-77.74400,16>, which is a farm near here. Mm-Hmm.  And, uh, well, we, we all had fun.
 Speaker 0    00:03:11    Uh, who did your mother remarry?  
 Speaker 1    00:03:14    Bill Hubbert. Mm-Hmm.  And I had five step brothers and sisters. Suddenly.  
@@ -64,7 +65,7 @@ TOC     2    Town
 Speaker 0    00:08:27    Did you go into town a lot?  
 Speaker 1    00:08:29    Not much, no. No.  
 Speaker 0    00:08:33    What, what did you do in the town of Middleburg when you were younger?  
-Speaker 1    00:08:39    You just did your shopping? I mean, the, there were just, there was a <hardware store https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzOcH5S5Bh3ql_yz5HIt1wdWRDl0R8MMcg3g&s&.png> and a feed store and a drug store. And there were two drug stores, as a matter of fact. Mm-Hmm.  and, um, a couple of grocery stores. And that was it. None of these boutiquey kind of places. <laugh>.  
+Speaker 1    00:08:39    You just did your shopping? I mean, the, there were just, there was a <hardware store https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzOcH5S5Bh3ql_yz5HIt1wdWRDl0R8MMcg3g&s&.png> and a feed store and a drug store. And there were two <drug stores https://www.middleburglife.com/wp-content/uploads/2023/02/Photo_08-1.jpg>, as a matter of fact. Mm-Hmm.  and, um, a couple of grocery stores. And that was it. None of these boutiquey kind of places. <laugh>.  
 Speaker 0    00:09:04    Did you go to Washington at all?  
 Speaker 1    00:09:06    No. Sometimes, but not often. Right.  
 Speaker 0    00:09:09    Your life was pretty much centered out here around  
@@ -80,7 +81,7 @@ Speaker 0    00:10:04    And what did you study?
 Speaker 1    00:10:07    Theater.  
 Speaker 0    00:10:08    Oh, that's fun. <laugh>. 
 TOC     2    The war
-Speaker 1    00:10:10    But I didn't, I didn't graduate. I, I didn't, I got married and I worked, actually it was during the war, so I worked down, um, as a nurse's, as a Red Cross nurse's aide first when I was, I guess 16, 17 in the, um, <Winchester Hospital https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDXHFI7W2UcuL6pagMdn01dyzgK2hbZ1D_UA&s&.png>. Hmm. And then I went to, what is now the Greenbriar in Whiteford Springs, but was then Ashford General Army Hospital.  
+Speaker 1    00:10:10    But I didn't, I didn't graduate. I, I didn't, I got married and I worked, actually it was during the war, so I worked down, um, as a nurse's, as a Red Cross nurse's aide first when I was, I guess 16, 17 in the, um, <Winchester Hospital https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDXHFI7W2UcuL6pagMdn01dyzgK2hbZ1D_UA&s&.png>. Hmm. And then I went to, what is now the <Greenbrier https://storage.googleapis.com/hippostcard/p/db69d9c91d3ac0ed96ba674899a7d261-800.jpg> in <White Sulfer Springs @37.79581,-80.29358,12>, but was then <Ashford General Army Hospital https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQA4T-10jexwP6BXEpsa06kcMg8eVA8DJmr5A&s#.png>.  
 Speaker 0    00:10:43    Really? I didn't realize that. Yeah.  
 Speaker 1    00:10:46    And, and, uh, there were about a dozen of us. We were volunteers and they worked us hard and they, they housed us and they fed us. And, um, we worked the same hours as the nurses. Mm-Hmm.  eight hour days, eight hour shifts. And, and so I was there for a year, maybe a little over a year.  
 Speaker 0    00:11:13    And what were your responsibilities there?  
@@ -142,7 +143,7 @@ Speaker 0    00:19:33    So he was in with the racing too?
 Speaker 1    00:19:36    Yeah.  
 Speaker 0    00:19:36    Or just the manage  
 Speaker 1    00:19:37    Management. But he, he never got on, I mean, once in a while he'd, if I was sick or something, he'd, um, exercise my hunter if needed to be, and he'd always get run away with. So <laugh> <laugh>, he didn't really like that very much.  
-Speaker 0    00:19:55    Tell me about the, um, you've referenced all the dances and hunt balls, and can you talk a little bit about the Society of Middleburg when you were, um,  
+Speaker 0    00:19:55    Tell me about the, um, you've referenced all the dances and hunt balls, and can you talk a little bit about the society of Middleburg when you were, um,  
 Speaker 1    00:20:07    Coming up? Well, it was, um, as I said, very small community. And the, the all ages would be at, I mean, from the age, from when you were old enough to go, um, to those dances, all ages would be there. And, uh, sometimes, apparently, usually I had gone home by the time this happened. Usually, um, there would be a fight at the end <laugh>. And, uh, that usually consisted of the Randolph family.  
 Speaker 0    00:20:50    Oh,  
 Speaker 1    00:20:50    Yeah. Dr. Randolph and his son, his two sons would get into altercations with people. And, uh, but they were, you know, they were otherwise fun. Lots of pink coats and, and everybody dressed to the teeth and Mm-Hmm.  all having a good time.  
@@ -351,7 +352,7 @@ Speaker 1    00:46:45    No, no, no. It was just an acre.
 Speaker 0    00:46:47    It was just an acre. Yeah. And then when did you get this?  
 Speaker 1    00:46:50    We got this, um, well, I guess a little over 50 years ago. Mm-Hmm. , because we, we built the house.  
 Speaker 0    00:46:58    So is it contiguous land to that? No,  
-Speaker 1    00:47:02    No, no, no. It's the goer's farm is where the wards lived. Who Buddy Ward was is I say the one that owned that little house.  
+Speaker 1    00:47:02    No, no, no. It's the goer's farm is where the Wards lived. Who Buddy Ward was is I say the one that owned that little house.  
 Speaker 0    00:47:11    Right.  
 Speaker 1    00:47:12    And, and he owned that whole farm.  
 Speaker 0    00:47:14    Right.  

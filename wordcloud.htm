@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+		<script type="text/javascript" src="lib/jQWCloudv3.4.1.js"></script>
+	</head>
+	<body>
+		<br>
+		<div id="wordCloud" style="width:100%;height:calc(100vh - 36px);overflow:hidden;"></div>
+	<script>
+
+		$(document).ready(function() {
+			$("#wordCloud").jQWCloud({
+				words: [
+						{word: 'Middleburg', weight: 40},
+						{word: 'Horses', weight: 39},
+						{word: 'Property', weight: 11, color: 'green'},
+						{word: 'Hunt', weight: 27},
+						{word: 'Hill', weight: 36},
+						{word: 'Fox', weight: 39},
+						{word: 'Riding', weight: 27},
+						{word: 'School', weight: 40},
+						{word: 'Shop', weight: 39},
+						{word: 'Greenbrier', weight: 11, color: 'green'},
+						{word: 'Mayflower', weight: 36},
+						{word: 'Family', weight: 39},
+						{word: 'Home', weight: 12, color: 'green'},
+						{word: 'Mellon', weight: 27},
+						{word: 'Zulla', weight: 22}
+											
+				],
+				minFont: 20,
+				maxFont: 250,
+				ontOffset: 50,
+				cloud_font_family: 'Owned',
+				padding_left: 5,
+				word_common_classes: 'WordClass',		
+				word_click: function(){ 
+								
+				},		              
+			});
+		});
+		
+	</script>
+</body>
+</html>
