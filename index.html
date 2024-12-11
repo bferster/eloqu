@@ -106,6 +106,8 @@
 		app.AudioInit();																	// Init audio
 		let url=window.location.search.substring(1);						   				// Get query string
 		$(window).on("resize orientationchange",()=>{ resize($("#el-divider").offset().left); }) // ON RESIZE
+		if (window.addEventListener) window.addEventListener("message",html5MessageHandler,false);	// Add event handler
+		else						 window.attachEvent("message",html5MessageHandler);		// Add handler
 	
 		$("#el-rawscript").scroll(()=>{														// ON DIVIDER DRAG
 			let pct=$("#el-rawscript")[0].scrollTop/$("#el-rawscript")[0].scrollHeight;		// % of scroll
@@ -159,7 +161,12 @@
 			document.documentElement.style.setProperty("--maxvh", window.innerHeight+"px");	// Set CSS var for IOS 100vh isssue
 		}	
 	});
-
+	
+	function html5MessageHandler(e)															// ON HTML5 MESSAGE
+	{
+		if (e && e.data) 																	// If a valid message				
+		trace(e.data);																		// Route
+	}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // APP
@@ -318,7 +325,7 @@ class App  {
 		if (!app.inPlay)	app.aud.currentTime=time;												// Set audio
 	}	
 
-	CountWords(start=0,span=300)																// COUNT WORDS IN TIMESPAN
+	CountWords(start=0,span=600)																// COUNT WORDS IN TIMESPAN
 	{
 		start=Math.max(0,start-span/2);
 		let i,j,k,end=Math.min(start+span,app.trt-10);
@@ -326,13 +333,13 @@ class App  {
 		for (i=0;i<app.script.length;++i)	if (app.script[i].s >= start) break;					// Run up to start
 		for (i=i;i<app.script.length;++i)	{														// For each line in span
 			if (app.script[i].s >= end)	break;														// Quit at end of span
-			if (app.script[i].who == 0)		continue;												// Skip interviewer
+			if (app.script[i].who == 0)	continue;													// Skip interviewer
 			s=$("#el-L"+app.script[i].s).text().match(/\b[\w|'|-]+\b/g);							// Get words in line
 			for (j=0;j<s.length;++j) {																// For each word in line
-				if (s[j].length)
-				for (k=0;k<app.people.length;++k) s[j]=s[j].replace(app.people[k].toUpperCase()+":","");
-				if (s[j].length < 3)	continue;													// Skip shorts
-				if (!w[s[j]])	w[s[j].replace("\'","&apos;")]=1;															// Add  1st
+				if (!s[j].length) continue;															// Skip blanks					
+				for (k=0;k<app.people.length;++k) s[j]=s[j].replace(app.people[k].toUpperCase(),"");// Remove speaker names
+				if (s[j].length < 4)	continue;													// Skip shorts
+				if (!w[s[j]])	w[s[j].replace("\'","&apos;")]=1;									// Add  1st
 				else			w[s[j]]++;															// Add others
 				}	
 			}

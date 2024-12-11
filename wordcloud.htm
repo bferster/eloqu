@@ -45,9 +45,13 @@
 				cloud_font_family: 'Owned',
 				padding_left: 5,
 				word_common_classes: 'WordClass',		
-				word_click: function(){ 
-								
-				},		              
+				word_mouseEnter:function(){ $(this).css("text-decoration","underline") },
+				word_mouseOut:function(){ $(this).css("text-decoration","none") },
+				word_click:function(){ 
+					let str="ELOQU="+$(this).text().trim();													
+					if (window.parent)	window.parent.postMessage(str,"*");							
+					else				window.postMessage(str,"*");																		
+					},		
 			});
 		});
 
