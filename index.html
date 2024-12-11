@@ -227,7 +227,8 @@ class App  {
 					str+=`<div onclick="app.ShowMedia('IMG','${title[1]}')" 
 						style="text-align:center;color:#339999;font-size:24px"><br>An interview with <b>
 						${app.name.replace("_"," ")}</b><br><span style="font-size:16px">
-						${s[i].substring(8)}</span><br><br></div>`;
+						${s[i].substring(8)}</span><br><br></div>
+						${s[i]=app.Instructions()}`													// Add instructions
 						if (title)	app.ShowMedia("IMG",title[1]);
 					}
 				else if (s[i].match(/people  /i))	{												// People labels
@@ -238,9 +239,30 @@ class App  {
 		}});
 	}
 
-	Highlight(time)																				// HIGHTLIGHT CURRENT LINE
+	Instructions()																				// SHOW INSTRUCTIONS
+	{
+		let str=`<ul>
+		<li><img  src="img/playbut.png" style="width:19px;vertical-align:-4px"> plays the audio, with synched transcript</li>
+		<li>Drag time bar <div style="display:inline-block;background-color:#339999;width:12px;height:12px;border-radius:16px"></div> to scrub entire interview</li> 
+		<li>Click on <b style="margin:0 0 -3px;display:inline-block;cursor:pointer;color:#990000;margin-bottom:-3px;border:1px solid #990000;border-radius:12px;padding:0 8px">
+			red boxes</b> in transcript to view pictures in viewer</li>
+		<li>Click on <b style="margin:0 0 -3px;display:inline-block;cursor:pointer;color:#009900;border:1px solid #009900;border-radius:12px;padding:0 8px">
+			green boxes</b> to view location on map</li>
+		<li>Click on <b style="margin:0 0 -3px;display:inline-block;cursor:pointer;color:#000099;border:1px solid #000099;border-radius:12px;padding:0 8px">		
+			blue boxes</b> to view web sites</li>
+		<li>Click on <span style="margin:0 0 -3px;display:inline-block;cursor:pointer;color:#f87498;border:1px solid #f87498;border-radius:12px;padding:0 8px">		
+			word cloud</span> button to see word cloud of transcript at this point</li></ul>`;
+		return str;
+		}
+
+		Highlight(time)																				// HIGHTLIGHT CURRENT LINE
 	{
 		let i;
+		if (time <= 0)	{																			// If at start
+			time=0;																					// Cap at 0
+			$("#el-rawscript").scrollTop(0);														// Scroll to top
+			return;																					// Quit
+			}
 		for (i=0;i<this.tPos.length;++i)	if (this.tPos[i] >= time) break;						// Find current line
 		if (i == this.tPos.length)	return;															// Not found
 		$("[id^=el-L]").css("background-color","");													// Clear all
@@ -260,8 +282,6 @@ class App  {
 					if (g[i].match(/\.jpg|\.jpeg|\.gif|\.png/)) 
 						s=`<b><p title="See image" style="margin:0 0 -3px;display:inline-block;cursor:pointer;color:#990000;margin-bottom:-3px;border:1px solid #990000;border-radius:12px;padding:0 8px" onclick="app.ShowMedia('IMG','${d[2]}')">${d[1]}</p></b>`;	// Must be a MAP, add link
 					else s=`<b><p title="See site" style="margin:0 0 -3px;display:inline-block;cursor:pointer;color:#000099;margin-bottom:-3px;border:1px solid #000099;border-radius:12px;padding:0 8px" onclick="app.ShowMedia('URL','${d[2]}')">${d[1]}</p></b>`;	// Must be a MAP, add link
-
-					
 					}	
 				else{
 					d=g[i].match(/<(.*)(@.*)>/);
@@ -287,13 +307,39 @@ class App  {
 		if (type.toUpperCase() == "URL") 		$("#el-mediaIF").attr("src",params);				// Show URL
 		else if (type.toUpperCase() == "MAP") 	$("#el-mediaIF").attr("src","map.htm?"+params);		// Show map
 		else if (type.toUpperCase() == "IMG") 	$("#el-mediaIF").attr("src","zoomer.htm?"+params);	// Show image
-		else if (type.toUpperCase() == "WORD") 	$("#el-mediaIF").attr("src","wordcloud.htm?"+params);	// Show wordcloud
-	}
+		else if (type.toUpperCase() == "WORD") {
+		 	let w=app.CountWords(app.aud.currentTime);												// Get word array
+			$("#el-mediaIF").attr("src","wordcloud.htm?"+w);									// Show wordcloud
+		}
+	}	
 	
 	Goto(time)																					// GO TO A TIME
 	{
 		if (!app.inPlay)	app.aud.currentTime=time;												// Set audio
-	}		
+	}	
+
+	CountWords(start=0,span=300)																// COUNT WORDS IN TIMESPAN
+	{
+		start=Math.max(0,start-span/2);
+		let i,j,k,end=Math.min(start+span,app.trt-10);
+		let s=[],w=[];
+		for (i=0;i<app.script.length;++i)	if (app.script[i].s >= start) break;					// Run up to start
+		for (i=i;i<app.script.length;++i)	{														// For each line in span
+			if (app.script[i].s >= end)	break;														// Quit at end of span
+			if (app.script[i].who == 0)		continue;												// Skip interviewer
+			s=$("#el-L"+app.script[i].s).text().match(/\b[\w|'|-]+\b/g);							// Get words in line
+			for (j=0;j<s.length;++j) {																// For each word in line
+				if (s[j].length)
+				for (k=0;k<app.people.length;++k) s[j]=s[j].replace(app.people[k].toUpperCase()+":","");
+				if (s[j].length < 3)	continue;													// Skip shorts
+				if (!w[s[j]])	w[s[j].replace("\'","&apos;")]=1;															// Add  1st
+				else			w[s[j]]++;															// Add others
+				}	
+			}
+		s="";
+		for (k in w) if (w[k] > 1) s+=k+"="+w[k]+",";												// For each word, add to string
+		return s;																					// Retuen words			
+		}
 
 }	// App class closure
 
@@ -303,7 +349,7 @@ class App  {
 // HELPERS 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
-function trace(msg, p1, p2, p3, p4)																// CONSOLE 
+	function trace(msg, p1, p2, p3, p4)																// CONSOLE 
 	{
 		if (p4 != undefined)
 			console.log(msg,p1,p2,p3,p4);
