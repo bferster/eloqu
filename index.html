@@ -67,8 +67,9 @@
 	<div id="el-main" class="el-main">
 		<div id="el-script" class="el-script">
 			<div id="el-rawscript" class="el-rawscript">Transcript</div>
-			<img src="img/search.png" class="el-icon" style="left:16px;bottom:16px">
-			<div id="el-showTrans" class="el-bs" style="right:16px;bottom:16px;border:2px solid #339999;color:#339999;">See Contents</div>
+			<img id="el-search" src="img/search.png" class="el-icon" style="left:16px;bottom:16px">
+			<input type="text" id="el-searchterm" onkeypress="HandleEnter(event)" class="el-is" style="position:absolute;left:60px;width:100px;border-color:#339999;margin-top:1px">
+			<!--div id="el-showTrans" class="el-bs" style="right:16px;bottom:16px;border:2px solid #339999;color:#339999">See Contents</div-->
 		</div>
 		<div id="el-media"  class="el-media"><br>
 			<iframe id="el-mediaIF" class="el-mediaIF" frameborder=0 src=""></iframe>	
@@ -117,11 +118,6 @@
 		$("body").keyup(function(e) {														// KEY DOWN HANDLER
 			});
 
-	 	$("#el-transFile").on("change",(e)=>{												// ON FILE LOAD
-			app.MakeTranscript(e);															// Read file
-			$("#el-transFile").val("");														// Clear value		
-			});
-			
 		$("#el-divider").hover(																// ON DIVIDER HOVER
 			()=>{$("#el-divider").css({"background-color":"#c7d2e9"});}, 					// Hilite
 			()=>{$("#el-divider").css({"background-color":""});}							// Normal
@@ -149,6 +145,11 @@
 			Sound("click");																	// Click
 			});
 
+		$("#el-search").on("click",()=>{													// ON PLAY CLICK
+			Sound("click");																	// Click
+			app.Search(app.aud.currentTime,$("#el-searchterm").val());						// Search
+			});
+
 		$("#el-showTrans").on("click",()=>{													// ON TRANS CLICK
 			app.showTrans=!app.showTrans;													// Toggle flag
 			$("#el-showTrans").text(`See ${app.showTrans ? "Transcript" : " Contents"}`);	// Flop names
@@ -165,7 +166,12 @@
 	function html5MessageHandler(e)															// ON HTML5 MESSAGE
 	{
 		if (e && e.data) 																	// If a valid message				
-		trace(e.data);																		// Route
+			app.Search(app.aud.currentTime,e.data.split("=")[1]);							// Search 
+	}
+
+	function HandleEnter(e)																	// HANDLE ENTER KEY
+	{
+		if (e.keyCode == 13)	$("#el-search").trigger("click");							// Enter == click
 	}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -248,21 +254,34 @@ class App  {
 
 	Instructions()																				// SHOW INSTRUCTIONS
 	{
-		let str=`<ul>
+		let str=`<span style="color:#339999;font-size:.9em;line-height:1.7em"><span style="color:#339999"><b>eloqú</b></span> ia a web-based media player produced by the Middleburg Museum to offer a more interactive and visual way to experience rich oral histories.
+		<ul>
 		<li><img  src="img/playbut.png" style="width:19px;vertical-align:-4px"> plays the audio, with synched transcript</li>
 		<li>Drag time bar <div style="display:inline-block;background-color:#339999;width:12px;height:12px;border-radius:16px"></div> to scrub entire interview</li> 
-		<li>Click on <b style="margin:0 0 -3px;display:inline-block;cursor:pointer;color:#990000;margin-bottom:-3px;border:1px solid #990000;border-radius:12px;padding:0 8px">
-			red boxes</b> in transcript to view pictures in viewer</li>
-		<li>Click on <b style="margin:0 0 -3px;display:inline-block;cursor:pointer;color:#009900;border:1px solid #009900;border-radius:12px;padding:0 8px">
-			green boxes</b> to view location on map</li>
-		<li>Click on <b style="margin:0 0 -3px;display:inline-block;cursor:pointer;color:#000099;border:1px solid #000099;border-radius:12px;padding:0 8px">		
-			blue boxes</b> to view web sites</li>
-		<li>Click on <span style="margin:0 0 -3px;display:inline-block;cursor:pointer;color:#f87498;border:1px solid #f87498;border-radius:12px;padding:0 8px">		
-			word cloud</span> button to see word cloud of transcript at this point</li></ul>`;
+		<li>Click on <b style="margin:0 0 -3px;display:inline-block;color:#990000">red boxes</b> in transcript to view pictures in viewer</li>
+		<li>Click on <b style="margin:0 0 -3px;display:inline-block;color:#009900">	green boxes</b> to view location on map</li>
+		<li>Click on <b style="margin:0 0 -3px;display:inline-block;color:#000099">	blue boxes</b> to view web sites</li>
+		<li>Click on <span style="margin:0 0 -3px;display:inline-block;color:#f87498;border:1px solid #f87498;border-radius:12px;padding:0 8px">		
+			word cloud</span> button to see word cloud of transcript at this point</li>
+		<li>Clicking on a word in the cloud searches for that word</li></ul></span>`;
 		return str;
 		}
 
-		Highlight(time)																				// HIGHTLIGHT CURRENT LINE
+	Search(start, term)																				// GO TO SEARCH TERM
+	{
+		let i;
+		if (!term)	return;																				// No terms
+		let e=new RegExp(term,"i");																		// Make serach regex
+		for (i=0;i<app.script.length;++i)	if (app.script[i].s >= start) break;						// Run up to start
+		for (i=i;i<app.script.length;++i)	{															// For each line in span
+			if (app.script[i].txt.match(e)) {															// If term in this one
+				app.aud.currentTime=app.script[i].s+1;													// Go there
+				return;																					// Quit
+				}	
+			}
+	}
+
+	Highlight(time)																				// HIGHTLIGHT CURRENT LINE
 	{
 		let i;
 		if (time <= 0)	{																			// If at start
@@ -273,10 +292,10 @@ class App  {
 		for (i=0;i<this.tPos.length;++i)	if (this.tPos[i] >= time) break;						// Find current line
 		if (i == this.tPos.length)	return;															// Not found
 		$("[id^=el-L]").css("background-color","");													// Clear all
-		let y=$("#el-L"+this.tPos[i-1]).offset().top+$("#el-rawscript")[0].scrollTop;				// Position in script
+		let y=$("#el-L"+this.tPos[i-2]).offset().top+$("#el-rawscript")[0].scrollTop;				// Position in script
 		let r=y/$("#el-rawscript")[0].scrollHeight;													// % in script
 		$("#el-rawscript").scrollTop(r*$("#el-rawscript")[0].scrollHeight-$("#el-script").height()/2+32);	// Scroll
-		$("#el-L"+this.tPos[i-1]).css("background-color","#f9f9c0");								// Highlight current line
+		$("#el-L"+this.tPos[i-2]).css("background-color","#f9f9c0");								// Highlight current line
 	}
 
 	AddMarkup(str)																				// ADD MARKUP TO LINE
