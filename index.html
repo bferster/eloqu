@@ -101,11 +101,24 @@
 	var isMobile=false;																		
 	
 	$(document).ready(()=> {								           						// ON PAGE LOADED
-		isMobile=navigator.userAgent.match(/(ipad|iphone|ipod|android)/i) ? true : false;	// Set mobile flag
+		isMobile=navigator.userAgent.match(/(iphone|android)/i) ? true : false;				// Set mobile flag
 		document.documentElement.style.setProperty("--maxvh", window.innerHeight+"px");		// Set CSS var for IOS 100vh isssue
 		app=new App();																		// Load app
-		app.AudioInit();																	// Init audio
+		
 		let url=window.location.search.substring(1);						   				// Get query string
+		if (url) app.name=url.split("&")[0];												// Get  name
+		if (url.match(/&auto/i))	app.autoPlay=true;										// Autoplay?
+		if (url.match(/t=/)) 		app.start=url.match(/&t=(\d*)/)[1]-0;					// If time set
+
+		app.MakeScript();																	// Load and parse script
+		app.AudioInit();																	// Init audio
+			
+		if (isMobile) {																		// Phone
+			$("#el-script").css("width",0);													// Script
+			$("#el-divider").css("left",0);													// Divider
+			$("#el-media").css({left:16,width:$(window).width()-44});						// Media
+			}
+
 		$(window).on("resize orientationchange",()=>{ resize($("#el-divider").offset().left); }) // ON RESIZE
 		if (window.addEventListener) window.addEventListener("message",html5MessageHandler,false);	// Add event handler
 		else						 window.attachEvent("message",html5MessageHandler);		// Add handler
@@ -159,7 +172,6 @@
 		function resize(l) {																// RESIZE PANES
 			$("#el-script").css("width",l-28);												// Script
 			$("#el-media").css({left:l+16,width:$(window).width()-l-44});					// Media
-			document.documentElement.style.setProperty("--maxvh", window.innerHeight+"px");	// Set CSS var for IOS 100vh isssue
 		}	
 	});
 	
@@ -185,12 +197,14 @@ class App  {
 		app=this;																					// App global pointer
 		this.script=[];																				// Holds script lines
 		this.media=[];																				// Holds media lines
+		this.start=0;																				// Starting time
 		this.trt=0;																					// Script TRT
+		this.lastLine=0;
 		this.inPlay=false;																			// Playing flag	
 		app.showTrans=false;																		// Transcript flag	
 		app.aud=null;																				// Audio player object
+		app.autoPlay=false;																			// Autoplay flag
 		app.name="Natalie_Kaye";																	// Name of history
-		app.MakeScript();																			// Load and parse script
 		app.people=[];																				// People
 		app.tPos=[];																				// Vertical position
 	}
@@ -203,7 +217,9 @@ class App  {
 		app.aud.addEventListener("durationchange", ()=>{											// Loaded?
 			app.trt=app.aud.duration;																// Set TRT
 			$("#el-trt").text(SecondsToTimecode(app.trt));											// Set end time
-			});
+			app.aud.currentTime=app.start;															// Set start times
+			app.Play(app.autoPlay ? true : false);													// Set play 
+		});
 
 		app.aud.addEventListener("timeupdate", ()=>{											// Playing?
 			$("#el-slider").slider("option","value",this.aud.currentTime/this.trt*100);				// Move slider		
@@ -248,7 +264,7 @@ class App  {
 					app.people=s[i].substring(7).split(",");										// Get
 					}
 			}	
-			$("#el-rawscript").html(str);
+			$("#el-rawscript").html(str);															// Add markup
 		}});
 	}
 
@@ -296,6 +312,18 @@ class App  {
 		let r=y/$("#el-rawscript")[0].scrollHeight;													// % in script
 		$("#el-rawscript").scrollTop(r*$("#el-rawscript")[0].scrollHeight-$("#el-script").height()/2+32);	// Scroll
 		$("#el-L"+this.tPos[i-2]).css("background-color","#f9f9c0");								// Highlight current line
+		app.FindMedia(i-2);																			// Find and show media in this line
+	}
+		
+	FindMedia(line)
+	{		
+		if (line == this.lastLine)	return;															// Skip if already done
+		let s=$("#el-L"+this.tPos[line]).html();													// Get text
+		s=s.match(/showMedia\((.*?)\)/i);															// Get media
+		if (s) s=s[1].replace(/'|"/g,"");															// No ' or "
+		if (s) s=s.match(/(.*?),(.*)/);																// Split
+		if (s)	app.ShowMedia(s[1],s[2]);															// Show it
+		this.lastLine=line;																			// Set last
 	}
 
 	AddMarkup(str)																				// ADD MARKUP TO LINE
@@ -324,6 +352,7 @@ class App  {
 	{
 		mode == "toggle" ? app.inPlay=!app.inPlay :	app.inPlay=mode									// Set flag
 		$("#el-play").attr("src",`img/${app.inPlay ? "pause" : "play"}but.png`);					// Flop images
+		this.lastLine=0;																			// Reset last time
 		if (app.inPlay)	app.aud.play();																// Play
 		else			app.aud.pause();															// Pause
 	}
