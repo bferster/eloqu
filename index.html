@@ -9,7 +9,6 @@
 		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.14.1/themes/smoothness/jquery-ui.css">
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js"></script>
 		<script src="lib/jquery.ui.touch-punch.min.js"></script>
-
 	</head>
 	<style>
 		 body { 			font-family:SegoeUI,Verdana,Geneva,sans-serif; font-size:14px; box-sizing:border-box; 
@@ -65,20 +64,21 @@
 </style>
 <body>
 	<div id="el-main" class="el-main">
+		<input type="file" id="el-scriptfile" accept=".txt,.text" style="display:none">
 		<div id="el-script" class="el-script">
 			<div id="el-rawscript" class="el-rawscript">Transcript</div>
 			<img id="el-search" src="img/search.png" class="el-icon" style="left:16px;bottom:16px">
 			<input type="text" id="el-searchterm" onkeypress="HandleEnter(event)" class="el-is" style="position:absolute;left:60px;width:100px;border-color:#339999;margin-top:1px">
 			<!--div id="el-showTrans" class="el-bs" style="right:16px;bottom:16px;border:2px solid #339999;color:#339999">See Contents</div-->
 		</div>
-		<div id="el-media"  class="el-media"><br>
+		<div id="el-media" class="el-media"><br>
 			<iframe id="el-mediaIF" class="el-mediaIF" frameborder=0 src=""></iframe>	
-			<div id="el-showMedia" class="el-bs" style="right:16px;bottom:16px">Word Cloud</div>
+			<div id="el-showMedia"  class="el-bs" style="right:16px;bottom:16px">Word Cloud</div>
 			</div>
 		</div>
-		<div id="el-divider" class="el-divider"></div>
+		<div id="el-divider"  class="el-divider"></div>
 		<div id="el-control"  class="el-control">
-			<img id="el-home" src="img/home.png" class="el-icon" style="left:20px;bottom:8px;width:32px">
+			<img id="el-home" src="img/home.png"    class="el-icon" style="left:20px;bottom:8px;width:32px">
 			<img id="el-play" src="img/playbut.png" class="el-icon" style="left:68px;bottom:8px;width:32px">
 			<div id="el-slider" class="el-icon" style="left:120px;bottom:20px;width:calc(100% - 190px);height:4px;background-color:#f87498">
 				<div id="el-sliderhandle" class="ui-slider-handle">
@@ -86,12 +86,9 @@
 				</div>
 			</div>
 			<div id="el-trt" class="el-icon" style="right:16px;bottom:15px"></div>
-
 		</div>
 	</div>
-
 <script>
-
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 // MAIN 
@@ -103,32 +100,49 @@
 	$(document).ready(()=> {								           						// ON PAGE LOADED
 		isMobile=navigator.userAgent.match(/(iphone|android)/i) ? true : false;				// Set mobile flag
 		document.documentElement.style.setProperty("--maxvh", window.innerHeight+"px");		// Set CSS var for IOS 100vh isssue
-		app=new App();																		// Load app
 		
+		app=new App();																		// Load app	
 		let url=window.location.search.substring(1);						   				// Get query string
 		if (url) app.name=url.split("&")[0];												// Get  name
 		if (url.match(/&auto/i))	app.autoPlay=true;										// Autoplay?
 		if (url.match(/t=/)) 		app.start=url.match(/&t=(\d*)/)[1]-0;					// If time set
 
-		app.MakeScript();																	// Load and parse script
+		$.ajax({ url:"script/"+app.name+".txt",success:(s)=>{								// Load script
+			app.ParseScript(s);																// Parse script
+			}});																
+	
 		app.AudioInit();																	// Init audio
 			
 		if (isMobile) {																		// Phone
-			$("#el-script").css("width",0);													// Script
-			$("#el-divider").css("left",0);													// Divider
-			$("#el-media").css({left:16,width:$(window).width()-44});						// Media
+//			$("#el-script").css("width",0);													// Script
+//			$("#el-divider").css("left",0);													// Divider
+//			$("#el-media").css({left:16,width:$(window).width()-44});						// Media
 			}
+
+		$("#el-scriptfile").on("change",(e)=>{												// ON SCRIPT FILE LOAD
+			let file=e.target.files[0];														// Point at file
+			if (!file) 	return;																// Quit if bad
+			let reader=new FileReader();													// Init reader
+			reader.readAsText(file);														// Read file
+			reader.onload=(e)=>{ 															// When loaded
+				app.ParseScript(e.target.result);											// Parse script	
+				$("#el-scriptfile").val("");												// Clear value for reuse
+				}		
+			});
 
 		$(window).on("resize orientationchange",()=>{ resize($("#el-divider").offset().left); }) // ON RESIZE
 		if (window.addEventListener) window.addEventListener("message",html5MessageHandler,false);	// Add event handler
 		else						 window.attachEvent("message",html5MessageHandler);		// Add handler
 	
-		$("#el-rawscript").scroll(()=>{														// ON DIVIDER DRAG
+		$("#el-rawscript").scroll(()=>{														// ON SCROLL 
 			let pct=$("#el-rawscript")[0].scrollTop/$("#el-rawscript")[0].scrollHeight;		// % of scroll
 //			app.Highlight(pct*app.trt);														// Go there
 			});
 
 		$("body").keyup(function(e) {														// KEY DOWN HANDLER
+			if (!e) return;																	// Quit if no data
+			if ((e.which == 76) && e.altKey && e.ctrlKey) 									// Show Load script (ctrl+alt+l)
+				$("#el-scriptfile").css("display","inline-block");
 			});
 
 		$("#el-divider").hover(																// ON DIVIDER HOVER
@@ -172,6 +186,7 @@
 		function resize(l) {																// RESIZE PANES
 			$("#el-script").css("width",l-28);												// Script
 			$("#el-media").css({left:l+16,width:$(window).width()-l-44});					// Media
+			document.documentElement.style.setProperty("--maxvh", window.innerHeight+"px");		// Set CSS var for IOS 100vh isssue
 		}	
 	});
 	
@@ -221,51 +236,51 @@ class App  {
 			app.Play(app.autoPlay ? true : false);													// Set play 
 		});
 
-		app.aud.addEventListener("timeupdate", ()=>{											// Playing?
+		app.aud.addEventListener("timeupdate", ()=>{												// If Playing
 			$("#el-slider").slider("option","value",this.aud.currentTime/this.trt*100);				// Move slider		
 			$("#el-now").text(SecondsToTimecode(app.aud.currentTime));								// Set now time
 			app.Highlight(Math.floor(app.aud.currentTime));											// Set scroll
 		});
 	}
 
-	MakeScript()																				// CREATE SCRIPT FROM TRANSCRIPT
+	ParseScript(s) 																			// CREATE SCRIPT FROM TRANSCRIPT TEXT
 	{
 		let str="";
 		let i,d,o,start=0;		
 		this.script=[];	this.tPos=[]																// Start over		
-		$.ajax({ url:"script/"+this.name+".txt",success:(s)=>{
-			s=s.replace(/<laugh>/gi,"[laugh]");														// Restucture laugh
-			s=s.replace(/<affirmative>./gi,"");														// Remove Affirmative.
-			s=s.replace(/<affirmative>/gi,"");														// Remove Affirmative
-			s=s.replace(/\r/g,"");																	// Remove CRS
-			s=s.split("\n");																		// Split into lines
-				for (i=0;i<s.length;++i) {															// For each line
-				o={};																				// Blank object
-				if (s[i].match(/Speaker/i))	{														// A speaker line
-					d=s[i].match(/Speaker (\d).{4}(.{8}).{4}(.*)/i);								// Parse
-					o.s=TimecodeToSeconds(d[2]);													// Send end
-					o.who=d[1];																		// Set who
-					o.txt=app.AddMarkup(d[3]);														// Set text
-					this.tPos.push(start);															// Add to time list
-					str+=`<div id="el-L${start}" style="margin-bottom:.5em" onclick="app.Goto(${o.s})"><b>${app.people[o.who]}:&nbsp;</b> ${o.txt}</div>`;// Add line			
-					this.script.push(o);															// Add to obj
-					start=o.s;																		// Then is now	
+		s=s.replace(/<laugh>/gi,"[laugh]");															// Restucture laugh
+		s=s.replace(/<inaudible>/gi,"[inaudible]");													// Restucture 
+		s=s.replace(/<silence>/gi,"[silence]");														// Restucture 
+		s=s.replace(/<affirmative>./gi,"");															// Remove Affirmative.
+		s=s.replace(/\r/g,"");																		// Remove CRS
+		s=s.split("\n");																			// Split into lines
+		for (i=0;i<s.length;++i) {																	// For each line
+			o={};																					// Blank object
+			if (s[i].match(/Speaker/i))	{															// A speaker line
+				d=s[i].match(/Speaker (\d).{4}(.{8}).{4}(.*)/i);									// Parse
+				o.s=TimecodeToSeconds(d[2]);														// Send end
+				o.who=d[1];																			// Set who
+				o.txt=app.AddMarkup(d[3]);															// Set text
+				this.tPos.push(start);																// Add to time list
+				str+=`<div id="el-L${start}" style="margin-bottom:.5em" onclick="app.Goto(${o.s})"><b>${app.people[o.who]}:&nbsp;</b> ${o.txt}</div>`;// Add line			
+				this.script.push(o);																// Add to obj
+				start=o.s;																			// Then is now	
+			}
+			else if (s[i].match(/title/i))	{														// A title
+				str+="<div";																		// Start div
+				let title=s[i].match(/<(h.*)>/i);													// Split out title
+				if (title) str+=` onclick="app.ShowMedia('IMG','${title[1]}')"`;					// Add pic, if one
+				str+=` style="text-align:center;color:#339999;font-size:24px"><br><b>
+					${app.name.replace(/_/g," ")}</b><br><span style="font-size:16px;line-height:0">
+					${s[i].substring(8)}</span><br><br></div>
+					${s[i]=app.Instructions()}`														// Add instructions
+					if (title)	app.ShowMedia("IMG",title[1]);
 				}
-				else if (s[i].match(/title/i))	{													// A title
-					let title=s[i].match(/<(h.*)>/i);
-					str+=`<div onclick="app.ShowMedia('IMG','${title[1]}')" 
-						style="text-align:center;color:#339999;font-size:24px"><br>An interview with <b>
-						${app.name.replace("_"," ")}</b><br><span style="font-size:16px">
-						${s[i].substring(8)}</span><br><br></div>
-						${s[i]=app.Instructions()}`													// Add instructions
-						if (title)	app.ShowMedia("IMG",title[1]);
-					}
-				else if (s[i].match(/people  /i))	{												// People labels
-					app.people=s[i].substring(7).split(",");										// Get
-					}
+			else if (s[i].match(/people  /i))	{													// People labels
+				app.people=s[i].substring(7).split(",");											// Get
+				}
 			}	
-			$("#el-rawscript").html(str);															// Add markup
-		}});
+		$("#el-rawscript").html(str);															// Add markup
 	}
 
 	Instructions()																				// SHOW INSTRUCTIONS
@@ -295,7 +310,8 @@ class App  {
 				return;																					// Quit
 				}	
 			}
-	}
+		this.Search(0,term);																			// Wrap to 0		
+		}
 
 	Highlight(time)																				// HIGHTLIGHT CURRENT LINE
 	{
