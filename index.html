@@ -143,6 +143,8 @@
 			if (!e) return;																	// Quit if no data
 			if ((e.which == 76) && e.altKey && e.ctrlKey) 									// Show Load script (ctrl+alt+l)
 				$("#el-scriptfile").css("display","inline-block");
+//			else if ((e.which == 76) ) 														// Show Load script (ctrl+alt+l)
+
 			});
 
 		$("#el-divider").hover(																// ON DIVIDER HOVER
@@ -214,7 +216,8 @@ class App  {
 		this.media=[];																				// Holds media lines
 		this.start=0;																				// Starting time
 		this.trt=0;																					// Script TRT
-		this.lastLine=0;
+		this.curLine=0;																				// Currently playing line
+		this.lastLine=0;																			// Last line for media
 		this.inPlay=false;																			// Playing flag	
 		app.showTrans=false;																		// Transcript flag	
 		app.aud=null;																				// Audio player object
@@ -262,7 +265,7 @@ class App  {
 				o.who=d[1];																			// Set who
 				o.txt=app.AddMarkup(d[3]);															// Set text
 				this.tPos.push(start);																// Add to time list
-				str+=`<div id="el-L${start}" style="margin-bottom:.5em" onclick="app.Goto(${o.s})"><b>${app.people[o.who]}:&nbsp;</b> ${o.txt}</div>`;// Add line			
+				str+=`<div id="el-L${start}" style="margin-bottom:.5em"><b>${app.people[o.who]}:&nbsp;</b> ${o.txt}</div>`;// Add line			
 				this.script.push(o);																// Add to obj
 				start=o.s;																			// Then is now	
 			}
@@ -280,7 +283,13 @@ class App  {
 				app.people=s[i].substring(7).split(",");											// Get
 				}
 			}	
-		$("#el-rawscript").html(str);															// Add markup
+		$("#el-rawscript").html(str);																// Add markup
+		
+		$("[id^=el-L]").on("click", function(e) {													// On click
+ 			let time=e.target.id.substring(4);														// Get index
+			if (time != "")  app.Goto(time,e.ctrlKey);												// Go to time 
+		
+		});		
 	}
 
 	Instructions()																				// SHOW INSTRUCTIONS
@@ -323,11 +332,12 @@ class App  {
 			}
 		for (i=0;i<this.tPos.length;++i)	if (this.tPos[i] >= time) break;						// Find current line
 		if (i == this.tPos.length)	return;															// Not found
+		this.curLine=i-1;																			// Set line
 		$("[id^=el-L]").css("background-color","");													// Clear all
 		let y=$("#el-L"+this.tPos[i-2]).offset().top+$("#el-rawscript")[0].scrollTop;				// Position in script
 		let r=y/$("#el-rawscript")[0].scrollHeight;													// % in script
 		$("#el-rawscript").scrollTop(r*$("#el-rawscript")[0].scrollHeight-$("#el-script").height()/2+32);	// Scroll
-		$("#el-L"+this.tPos[i-2]).css("background-color","#f9f9c0");								// Highlight current line
+		$("#el-L"+this.tPos[i-1]).css("background-color","#f9f9c0");								// Highlight current line
 		app.FindMedia(i-2);																			// Find and show media in this line
 	}
 		
@@ -380,13 +390,13 @@ class App  {
 		else if (type.toUpperCase() == "IMG") 	$("#el-mediaIF").attr("src","zoomer.htm?"+params);	// Show image
 		else if (type.toUpperCase() == "WORD") {
 		 	let w=app.CountWords(app.aud.currentTime);												// Get word array
-			$("#el-mediaIF").attr("src","wordcloud.htm?"+w);									// Show wordcloud
-		}
+			$("#el-mediaIF").attr("src","wordcloud.htm?"+w);										// Show wordcloud
+			}
 	}	
 	
-	Goto(time)																					// GO TO A TIME
+	Goto(time, whileInPlay)																		// GO TO A TIME
 	{
-		if (!app.inPlay)	app.aud.currentTime=time;												// Set audio
+		if (!app.inPlay || whileInPlay)	app.aud.currentTime=time;									// Set audio
 	}	
 
 	CountWords(start=0,span=600)																// COUNT WORDS IN TIMESPAN
