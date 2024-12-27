@@ -249,7 +249,7 @@ class App  {
 	ParseScript(s) 																			// CREATE SCRIPT FROM TRANSCRIPT TEXT
 	{
 		let str="";
-		let i,d,o,start=0;		
+		let i,d,o;		
 		this.script=[];	this.tPos=[]																// Start over		
 		s=s.replace(/<laugh>/gi,"[laugh]");															// Restucture laugh
 		s=s.replace(/<inaudible>/gi,"[inaudible]");													// Restucture 
@@ -264,10 +264,9 @@ class App  {
 				o.s=TimecodeToSeconds(d[2]);														// Send end
 				o.who=d[1];																			// Set who
 				o.txt=app.AddMarkup(d[3]);															// Set text
-				this.tPos.push(start);																// Add to time list
-				str+=`<div id="el-L${start}" style="margin-bottom:.5em"><b>${app.people[o.who]}:&nbsp;</b> ${o.txt}</div>`;// Add line			
+				this.tPos.push(o.s);																// Add to time list
+				str+=`<div id="el-L${o.s}" style="margin-bottom:.5em"><b>${app.people[o.who]}:&nbsp;</b> ${o.txt}</div>`;// Add line			
 				this.script.push(o);																// Add to obj
-				start=o.s;																			// Then is now	
 			}
 			else if (s[i].match(/title/i))	{														// A title
 				str+="<div";																		// Start div
@@ -287,7 +286,7 @@ class App  {
 		
 		$("[id^=el-L]").on("click", function(e) {													// On click
  			let time=e.target.id.substring(4);														// Get index
-			if (time != "")  app.Goto(time,e.ctrlKey);												// Go to time 
+			if (time != "")  app.Goto(time-0+1,e.ctrlKey);											// Go to time, fudge highlight to next block 
 		
 		});		
 	}
@@ -332,13 +331,13 @@ class App  {
 			}
 		for (i=0;i<this.tPos.length;++i)	if (this.tPos[i] >= time) break;						// Find current line
 		if (i == this.tPos.length)	return;															// Not found
-		this.curLine=i-1;																			// Set line
+		this.curLine=i-1;																				// Set line
 		$("[id^=el-L]").css("background-color","");													// Clear all
-		let y=$("#el-L"+this.tPos[i-2]).offset().top+$("#el-rawscript")[0].scrollTop;				// Position in script
+		let y=$("#el-L"+this.tPos[i-1]).offset().top+$("#el-rawscript")[0].scrollTop;					// Position in script
 		let r=y/$("#el-rawscript")[0].scrollHeight;													// % in script
 		$("#el-rawscript").scrollTop(r*$("#el-rawscript")[0].scrollHeight-$("#el-script").height()/2+32);	// Scroll
-		$("#el-L"+this.tPos[i-1]).css("background-color","#f9f9c0");								// Highlight current line
-		app.FindMedia(i-2);																			// Find and show media in this line
+		$("#el-L"+this.tPos[i-1]).css("background-color","#f9f9c0");									// Highlight current line
+		app.FindMedia(i-1);																			// Find and show media in this line
 	}
 		
 	FindMedia(line)
