@@ -17,13 +17,13 @@
 		.el-divider {		position:absolute; height:calc(var(--maxvh) - 73px); width:12px; top:6px; left:calc(50% - 4px ); cursor:col-resize;
 							}
 		.el-script {		position:absolute; background-color: #fff; width:calc(50% - 12px); height:calc(100% - 73px); top:0; left:0;
-							border:6px solid #339999;
+							border:6px solid #339999; border-top-left-radius:24px; 
 							}
 		.el-rawscript {		height:calc(100% - 80px); overflow-x:hidden; overflow-y:scroll;  text-align:left; line-height: 1.5em;
 							margin:16px 4px 16px 16px; font-size:16px;
 						}
 		.el-media {			position:absolute; background-color: #eee; width:calc(50% - 6px); height:calc(100% - 73px); 
-							top:0; left:calc(50% - 6px); border:6px solid #339999;
+							top:0; left:calc(50% - 6px); border:6px solid #339999;  border-top-right-radius:24px;
 ]							}
 		.el-mediaIF {		position:absolute; width:100%; height:100%; left:0; top:0; border-radius:16px;
 							}
@@ -95,12 +95,10 @@
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
 	var app=null;
-	var isMobile=false;																		
-	
-	$(document).ready(()=> {								           						// ON PAGE LOADED
-		isMobile=navigator.userAgent.match(/(iphone|android)/i) ? true : false;				// Set mobile flag
-		document.documentElement.style.setProperty("--maxvh", window.innerHeight+"px");		// Set CSS var for IOS 100vh isssue
 		
+	$(document).ready(()=> {								           						// ON PAGE LOADED
+		document.documentElement.style.setProperty("--maxvh", window.innerHeight+"px");		// Set CSS var for IOS 100vh isssue
+	
 		app=new App();																		// Load app	
 		let url=window.location.search.substring(1);						   				// Get query string
 		if (url) app.name=url.split("&")[0];												// Get  name
@@ -188,8 +186,9 @@
 	
 	function html5MessageHandler(e)															// ON HTML5 MESSAGE
 	{
-		if (e && e.data) 																	// If a valid message				
-			app.Search(app.aud.currentTime,e.data.split("=")[1]);							// Search 
+		if (e && e.data) {																	// If a valid message				
+			app.Search(app.aud.currentTime,e.data.split("=")[1],true);						// Search 
+		}
 	}
 
 	function HandleEnter(e)																	// HANDLE ENTER KEY
@@ -219,6 +218,7 @@ class App  {
 		app.name="Natalie_Kaye";																	// Name of history
 		app.people=[];																				// People
 		app.tPos=[];																				// Vertical position
+		this.hideMedia=false;																		// Hide media flag
 	}
 
 	AudioInit()																					// INIT AUDIO
@@ -237,6 +237,7 @@ class App  {
 			$("#el-slider").slider("option","value",this.aud.currentTime/this.trt*100);				// Move slider		
 			$("#el-now").text(SecondsToTimecode(app.aud.currentTime));								// Set now time
 			app.Highlight(Math.floor(app.aud.currentTime));											// Set scroll
+			this.hideMedia=false;																	// Not hiding media anymore
 		});
 	}
 
@@ -300,7 +301,7 @@ class App  {
 		return str;
 		}
 
-	Search(start, term)																				// GO TO SEARCH TERM
+	Search(start, term, hideMedia=false)															// GO TO SEARCH TERM
 	{
 		let i;
 		if (!term)	return;																				// No terms
@@ -308,6 +309,7 @@ class App  {
 		for (i=0;i<app.script.length;++i)	if (app.script[i].s >= start) break;						// Run up to start
 		for (i=i;i<app.script.length;++i)	{															// For each line in span
 			if (app.script[i].txt.match(e)) {															// If term in this one
+				app.hideMedia=hideMedia;																// Set hide media flag
 				app.aud.currentTime=app.script[i].s+1;													// Go there
 				return;																					// Quit
 				}	
@@ -325,17 +327,18 @@ class App  {
 			}
 		for (i=0;i<this.tPos.length;++i)	if (this.tPos[i] >= time) break;						// Find current line
 		if (i == this.tPos.length)	return;															// Not found
-		this.curLine=i-1;																				// Set line
+		this.curLine=i-1;																			// Set line
 		$("[id^=el-L]").css("background-color","");													// Clear all
-		let y=$("#el-L"+this.tPos[i-1]).offset().top+$("#el-rawscript")[0].scrollTop;					// Position in script
+		let y=$("#el-L"+this.tPos[i-1]).offset().top+$("#el-rawscript")[0].scrollTop;				// Position in script
 		let r=y/$("#el-rawscript")[0].scrollHeight;													// % in script
 		$("#el-rawscript").scrollTop(r*$("#el-rawscript")[0].scrollHeight-$("#el-script").height()/2+32);	// Scroll
-		$("#el-L"+this.tPos[i-1]).css("background-color","#f9f9c0");									// Highlight current line
+		$("#el-L"+this.tPos[i-1]).css("background-color","#f9f9c0");								// Highlight current line
 		app.FindMedia(i-1);																			// Find and show media in this line
 	}
 		
 	FindMedia(line)
 	{		
+		if (this.hideMedia)			return;															// Don't show if hiding media
 		if (line == this.lastLine)	return;															// Skip if already done
 		let s=$("#el-L"+this.tPos[line]).html();													// Get text
 		s=s.match(/showMedia\((.*?)\)/i);															// Get media
