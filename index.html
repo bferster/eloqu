@@ -14,21 +14,21 @@
 		 body { 			font-family:SegoeUI,Verdana,Geneva,sans-serif; font-size:14px; box-sizing:border-box; 
 							padding:0; margin:0; position:fixed; width:100%; height:var(--maxvh); text-align:center
 							}
-		.el-divider {		position:absolute; height:calc(var(--maxvh) - 144px); width:16px; top:32px; left:calc(50% - 8px); cursor:col-resize;
+		.el-divider {		position:absolute; height:calc(var(--maxvh) - 73px); width:12px; top:6px; left:calc(50% - 4px ); cursor:col-resize;
 							}
-		.el-script {		position:absolute; background-color: #fff; width:calc(50% - 36px); height:calc(100% - 108px);
-							border-radius:16px; border: 6px solid #339999; top:16px; left:16px; 
+		.el-script {		position:absolute; background-color: #fff; width:calc(50% - 12px); height:calc(100% - 73px); top:0; left:0;
+							border:6px solid #339999;
 							}
 		.el-rawscript {		height:calc(100% - 80px); overflow-x:hidden; overflow-y:scroll;  text-align:left; line-height: 1.5em;
 							margin:16px 4px 16px 16px; font-size:16px;
 						}
-		.el-media {			position:absolute; background-color: #eee; width:calc(50% - 36px);  height:calc(100% - 108px);
-							top:16px; left:calc(50% + 8px); border-radius:16px; border: 6px solid #f87498;
-							}
+		.el-media {			position:absolute; background-color: #eee; width:calc(50% - 6px); height:calc(100% - 73px); 
+							top:0; left:calc(50% - 6px); border:6px solid #339999;
+]							}
 		.el-mediaIF {		position:absolute; width:100%; height:100%; left:0; top:0; border-radius:16px;
 							}
-		.el-control {		position:absolute; background-color: #d2d9f3; width:calc(100% - 32px); height:48px; 
-							border-radius:16px; top:calc(100% - 64px); left:16px; border: 1px solid #999 
+		.el-control {		position:absolute; background-color: #d2d9f3; width:calc(100%); height:60px; 
+							border-radius:0; bottom:0; left:0; border: 1px solid #999 
 							}
 		#el-sliderhandle {	background:#339999; border-radius:16px;margin-top: -4px; outline:none; font-size:12px;
 							text-align:center; line-height: 12px;
@@ -78,14 +78,14 @@
 		</div>
 		<div id="el-divider"  class="el-divider"></div>
 		<div id="el-control"  class="el-control">
-			<img id="el-home" src="img/home.png"    class="el-icon" style="left:20px;bottom:8px;width:32px">
-			<img id="el-play" src="img/playbut.png" class="el-icon" style="left:68px;bottom:8px;width:32px">
-			<div id="el-slider" class="el-icon" style="left:120px;bottom:20px;width:calc(100% - 190px);height:4px;background-color:#f87498">
+			<img id="el-home" src="img/home.png"    class="el-icon" style="left:20px;bottom:14px;width:32px">
+			<img id="el-play" src="img/playbut.png" class="el-icon" style="left:68px;bottom:14px;width:32px">
+			<div id="el-slider" class="el-icon" style="left:120px;bottom:26px;width:calc(100% - 190px);height:4px;background-color:#f87498">
 				<div id="el-sliderhandle" class="ui-slider-handle">
 					<div id="el-now" style="text-align:center;width:60px;margin-top:-14px;margin-left:-23px;font-size:11px">00:00</div>
 				</div>
 			</div>
-			<div id="el-trt" class="el-icon" style="right:16px;bottom:15px"></div>
+			<div id="el-trt" class="el-icon" style="right:16px;bottom:21px"></div>
 		</div>
 	</div>
 <script>
@@ -113,12 +113,6 @@
 	
 		app.AudioInit();																	// Init audio
 			
-		if (isMobile) {																		// Phone
-//			$("#el-script").css("width",0);													// Script
-//			$("#el-divider").css("left",0);													// Divider
-//			$("#el-media").css({left:16,width:$(window).width()-44});						// Media
-			}
-
 		$("#el-scriptfile").on("change",(e)=>{												// ON SCRIPT FILE LOAD
 			let file=e.target.files[0];														// Point at file
 			if (!file) 	return;																// Quit if bad
@@ -143,8 +137,6 @@
 			if (!e) return;																	// Quit if no data
 			if ((e.which == 76) && e.altKey && e.ctrlKey) 									// Show Load script (ctrl+alt+l)
 				$("#el-scriptfile").css("display","inline-block");
-//			else if ((e.which == 76) ) 														// Show Load script (ctrl+alt+l)
-
 			});
 
 		$("#el-divider").hover(																// ON DIVIDER HOVER
@@ -154,7 +146,9 @@
 
 		$("#el-divider").draggable({														// ON DIVIDER DRAG
 			axis: "x",	containment:"parent",												// Contain
-			drag:(event, ui)=>{ resize(ui.offset.left); }									// Resize on drag
+			start:()=>{ $("#el-media").css("pointer-events","none"); },						// Stop mouse on media
+			stop:()=>{ $("#el-media").css("pointer-events","all"); },						// Restore mouse on media
+			drag:(event, ui)=>{	resize(ui.offset.left); }									// Resize on drag
 			});
 		
 		$("#el-slider").slider({															// ON TIME SLIDER
@@ -186,8 +180,8 @@
 			});
 
 		function resize(l) {																// RESIZE PANES
-			$("#el-script").css("width",l-28);												// Script
-			$("#el-media").css({left:l+16,width:$(window).width()-l-44});					// Media
+			$("#el-script").css("width",l-6);												// Script
+			$("#el-media").css({left:l,width:$(window).width()-l-12});						// Media
 			document.documentElement.style.setProperty("--maxvh", window.innerHeight+"px");		// Set CSS var for IOS 100vh isssue
 		}	
 	});
@@ -358,7 +352,7 @@ class App  {
 			for (i=0;i<g.length;++i) {
 				d=g[i].match(/<(.*)(http.*)>/);														// Get params
 				if (d) {																			// A URL in it
-					if (g[i].match(/\.jpg|\.jpeg|\.gif|\.png/)) 
+					if (g[i].match(/\.jpg|\.jpeg|\.gif|\.png|.webp/i)) 
 						s=`<b><p title="See image" style="margin:0 0 -3px;display:inline-block;cursor:pointer;color:#990000;margin-bottom:-3px;border:1px solid #990000;border-radius:12px;padding:0 8px" onclick="app.ShowMedia('IMG','${d[2]}')">${d[1]}</p></b>`;	// Must be a MAP, add link
 					else s=`<b><p title="See site" style="margin:0 0 -3px;display:inline-block;cursor:pointer;color:#000099;margin-bottom:-3px;border:1px solid #000099;border-radius:12px;padding:0 8px" onclick="app.ShowMedia('URL','${d[2]}')">${d[1]}</p></b>`;	// Must be a MAP, add link
 					}	
@@ -398,7 +392,7 @@ class App  {
 		if (!app.inPlay || whileInPlay)	app.aud.currentTime=time;									// Set audio
 	}	
 
-	CountWords(start=0,span=600)																// COUNT WORDS IN TIMESPAN
+	CountWords(start=0,span=300)																// COUNT WORDS IN TIMESPAN
 	{
 		start=Math.max(0,start-span/2);
 		let i,j,k,end=Math.min(start+span,app.trt-10);
