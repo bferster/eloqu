@@ -24,7 +24,7 @@
 						}
 		.el-media {			position:absolute; background-color: #eee; width:calc(50% - 6px); height:calc(100% - 73px); 
 							top:0; left:calc(50% - 6px); border:6px solid #339999;  border-top-right-radius:24px;
-]							}
+							}
 		.el-mediaIF {		position:absolute; width:100%; height:100%; left:0; top:0; border-radius:16px;
 							}
 		.el-control {		position:absolute; background-color: #d2d9f3; width:calc(100%); height:60px; 
@@ -94,16 +94,18 @@
 // MAIN 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
-	var app=null;
+	var app=null;																			// Main app
+	var isMobile=false;																		// Mobile?
 		
 	$(document).ready(()=> {								           						// ON PAGE LOADED
+		isMobile=navigator.userAgent.match(/(ipad|iphone|ipod|android)/i) ? true : false;	// Set mobile flag
 		document.documentElement.style.setProperty("--maxvh", window.innerHeight+"px");		// Set CSS var for IOS 100vh isssue
 	
 		app=new App();																		// Load app	
 		let url=window.location.search.substring(1);						   				// Get query string
 		if (url) app.name=url.split("&")[0];												// Get  name
-		if (url.match(/&auto/i))	app.autoPlay=true;										// Autoplay?
-		if (url.match(/t=/)) 		app.start=url.match(/&t=(\d*)/)[1]-0;					// If time set
+		if (url.match(/&auto/i) && !isMobile)	app.autoPlay=true;							// Autoplay? if not mobile
+		if (url.match(/t=/)) 					app.start=url.match(/&t=(\d*)/)[1]-0;		// If time set
 
 		$.ajax({ url:"script/"+app.name+".txt",success:(s)=>{								// Load script
 			app.ParseScript(s);																// Parse script
@@ -178,9 +180,10 @@
 			});
 
 		function resize(l) {																// RESIZE PANES
+			$("#el-divider").css("left",Math.min(l,$(window).width()-12));					// Divider
 			$("#el-script").css("width",l-6);												// Script
 			$("#el-media").css({left:l,width:$(window).width()-l-12});						// Media
-			document.documentElement.style.setProperty("--maxvh", window.innerHeight+"px");		// Set CSS var for IOS 100vh isssue
+			document.documentElement.style.setProperty("--maxvh", window.innerHeight+"px");	// Set CSS var for IOS 100vh isssue
 		}	
 	});
 	
