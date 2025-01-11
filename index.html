@@ -163,6 +163,11 @@
 			app.Play();																		// Toggle play
 			});
 
+		$("#el-home").on("click",()=>{														// ON PLAY CLICK
+			Sound("click");																	// Click
+			history.back();																	// Go back
+			});
+			
 		$("#el-showMedia").on("click",()=>{													// ON MEDIA CLICK
 			app.ShowMedia("WORD","");
 			Sound("click");																	// Click

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<link REL="SHORTCUT ICON" HREF="img/favicon.ico">
+		<title>eloqú Oral History Player</title>
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.14.1/themes/smoothness/jquery-ui.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.14.1/jquery-ui.min.js"></script>
+		<script src="lib/jquery.ui.touch-punch.min.js"></script>
+	</head>
+	<style>
+		body { 			font-family:SegoeUI,Verdana,Geneva,sans-serif; text-align:center;
+						}	
+	</style>
+
+	<body>
+		<br>
+		<div style="color:#339999;font-size:3em;line-height:1.7em"><span style="color:#339999"><b>eloqú</b></div>
+		<br>
+		<div style="padding:0 25%;font-size:1em;line-height:1.7em;text-align:left"><span style="color:#339999"><b>eloqú</b></span>	is a web-based media player produced by the Middleburg Museum to offer a more interactive and visual way to experience rich oral histories.
+			To make them more accessible, we made this player to make them more interactive and visual, by adding a clickable transcript, where you can can easily do keyword searches, and see images and maps that show locations in context.
+			<ul style="margin-left:12.5%">
+				<li><img  src="img/playbut.png" style="width:19px;vertical-align:-4px"> plays the audio, with synched transcript</li>
+				<li>Drag time bar <div style="display:inline-block;background-color:#339999;width:12px;height:12px;border-radius:16px"></div> to scrub entire interview</li> 
+				<li>Click on <b style="margin:0 0 -3px;display:inline-block;color:#990000">red boxes</b> in transcript to view pictures in viewer</li>
+				<li>Click on <b style="margin:0 0 -3px;display:inline-block;color:#009900">	green boxes</b> to view location on map</li>
+				<li>Click on <b style="margin:0 0 -3px;display:inline-block;color:#000099">	blue boxes</b> to view web sites</li>
+				<li>Click on <span style="margin:0 0 -3px;display:inline-block;color:#f87498;border:1px solid #f87498;border-radius:12px;padding:0 8px">		
+					word cloud</span> button to see word cloud of transcript at this point</li>
+				<li>Clicking on a word in the cloud searches for that word</li>
+			</ul>
+			<br>
+			<div style="width:100%;background-color:#339999;;text-align:center;color:#fff">Available interviews</div>
+			<div id="list"></div>
+			<br>	
+		</div>	
+	</div>
+
+
+<script>
+
+	AddLine("Natalie_Kaye","https://assets.isu.pub/document-structure/240724150510-1949f1d917c8af019638d1188096147d/v1/1602a96f03f428cf64634092f55c721f.jpeg?width=2160&quality=85%2C50","Interviewed 3/7/20 by Lydia Strohl","1 hour, 12 minutes");
+	AddLine("Ann_MacLeod","https://bloximages.chicago2.vip.townnews.com/loudounnow.com/content/tncms/assets/v3/editorial/0/94/0949ae1e-f8fc-11ee-a606-2f03337f3f5a/6619801190c97.image.jpg","Interviewed 2/7/20 by Lydia Strohl","48 minutes");
+	AddLine("Claudia_and_Sandy_Young","https://d1q40j6jx1d8h6.cloudfront.net/Obituaries/23112665/Thumbnail.jpg","Interviewed 3/7/20 by Lydia Strohl","2 hours, 9 minutes");
+
+	function AddLine(name, pic, byline, time)
+	{
+		let str=`<br>	
+		<div><a href="index.html?${name}"><img style="border:2px solid #000;width:15%" src="${pic}"></a>
+				<div style="display:inline-block;vertical-align:top;margin-left:16px">
+				<b>${name.replace(/_/g," ")}</b><br>
+				${byline}<br>
+				${time}
+				</div></div>`;
+		$("#list").append(str);
+
+		}
+
+</script>
+		
+
+</body>
+</html>
