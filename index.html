@@ -17,13 +17,13 @@
 		.el-divider {		position:absolute; height:calc(var(--maxvh) - 73px); width:12px; top:6px; left:calc(50% - 4px ); cursor:col-resize;
 							}
 		.el-script {		position:absolute; background-color: #fff; width:calc(50% - 12px); height:calc(100% - 73px); top:0; left:0;
-							border:6px solid #339999; border-top-left-radius:24px; 
+							border:6px solid #339999; border-top-left-radius:0px; 
 							}
 		.el-rawscript {		height:calc(100% - 80px); overflow-x:hidden; overflow-y:scroll;  text-align:left; line-height: 1.5em;
 							margin:16px 4px 16px 16px; font-size:16px;
 						}
 		.el-media {			position:absolute; background-color: #eee; width:calc(50% - 6px); height:calc(100% - 73px); 
-							top:0; left:calc(50% - 6px); border:6px solid #339999;  border-top-right-radius:24px;
+							top:0; left:calc(50% - 6px); border:6px solid #339999;  border-top-right-radius:0px;
 							}
 		.el-mediaIF {		position:absolute; width:100%; height:100%; left:0; top:0; border-radius:16px;
 							}
@@ -54,7 +54,8 @@
 		.el-icon {			cursor: pointer; position:absolute;
 							}
 														
-		@font-face {  		font-family: SegoeUI; src: url(img/segoeui.ttf);   }
+		@font-face {  		font-family: SegoeUI; src: url(img/segoeui.ttf);  font-family: Museum; src: url(img/Museum.ttf);  }
+
 		:root  {			--maxvh: 100vh  }
 		body ::-webkit-scrollbar { width: 9px; height:8px } 
 		body ::-webkit-scrollbar-track { background: transparent; }
@@ -272,12 +273,13 @@ class App  {
 				this.script.push(o);																// Add to obj
 			}
 			else if (s[i].match(/title/i))	{														// A title
+				str+="<div style='width:100%;text-align:center'> <img style='width:100px;text-align:center' src='img/MMLogo.png'></div>";								// Add logo
 				str+="<div";																		// Start div
 				let title=s[i].match(/<(h.*)>/i);													// Split out title
 				if (title) str+=` onclick="app.ShowMedia('IMG','${title[1]}')"`;					// Add pic, if one
-				str+=` style="text-align:center;color:#339999;font-size:24px"><br><b>
-					${app.name.replace(/_/g," ")}</b><br><span style="font-size:16px;line-height:0">
-					${s[i].substring(8)}</span><br><br></div>
+				str+=` style="text-align:center;color:#339999;letter-spacing:6px;line-height:1;font-size:40px;font-family:Museum"><b><br>
+					${app.name.replace(/_/g," ")}</b><br><div style="font-size:20px;padding-top:16px;letter-spacing:1px;">
+					${s[i].substring(8)}</div><br><br></div>
 					${s[i]=app.Instructions()}`														// Add instructions
 					if (title)	app.ShowMedia("IMG",title[1]);
 				}
