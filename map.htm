@@ -19,9 +19,9 @@
 		L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19}).addTo(map);
 		map.on('move',(e)=>{
 			let c=map.getCenter();
-			let s="@"+c.lat.toFixed(5);
+			let s=" @"+c.lat.toFixed(5);
 			s+=","+c.lng.toFixed(5);
-			s+=","+map.getZoom();
+			s+=","+map.getZoom()+">";
 			console.log(s)
 			});
 		</script>
