@@ -218,8 +218,7 @@ class App  {
 		this.media=[];																				// Holds media lines
 		this.start=0;																				// Starting time
 		this.trt=0;																					// Script TRT
-		this.curLine=0;																				// Currently playing line
-		this.lastLine=0;																			// Last line for media
+		this.lastMedia="";																			// Last media shown
 		this.inPlay=false;																			// Playing flag	
 		app.showTrans=false;																		// Transcript flag	
 		app.aud=null;																				// Audio player object
@@ -227,6 +226,7 @@ class App  {
 		app.name="Natalie_Kaye";																	// Name of history
 		app.people=[];																				// People
 		app.tPos=[];																				// Vertical position
+		app.mList=[];																				// Media list
 		this.hideMedia=false;																		// Hide media flag
 	}
 
@@ -253,8 +253,8 @@ class App  {
 	ParseScript(s) 																			// CREATE SCRIPT FROM TRANSCRIPT TEXT
 	{
 		let str="";
-		let i,d,o;		
-		this.script=[];	this.tPos=[]																// Start over		
+		let i,d,o,start=0;		
+		this.script=[];	this.tPos=[]; this.mList=[];												// Start over		
 		s=s.replace(/<laugh>/gi,"[laugh]");															// Restucture laugh
 		s=s.replace(/<inaudible>/gi,"[inaudible]");													// Restucture 
 		s=s.replace(/<silence>/gi,"[silence]");														// Restucture 
@@ -266,9 +266,9 @@ class App  {
 			if (s[i].match(/Speaker/i))	{															// A speaker line
 				d=s[i].match(/Speaker (\d).{4}(.{8}).{4}(.*)/i);									// Parse
 				o.s=TimecodeToSeconds(d[2]);														// Send end
-				o.who=d[1];																			// Set who
-				o.txt=app.AddMarkup(d[3]);															// Set text
 				this.tPos.push(o.s);																// Add to time list
+				o.who=d[1];																			// Set who
+				o.txt=app.AddMarkup(d[3],this.script.length);										// Set text
 				str+=`<div id="el-L${o.s}" style="margin-bottom:.5em"><b>${app.people[o.who]}:&nbsp;</b> ${o.txt}</div>`;// Add line			
 				this.script.push(o);																// Add to obj
 			}
@@ -288,7 +288,8 @@ class App  {
 				}
 			}	
 		$("#el-rawscript").html(str);																// Add markup
-		
+		this.SetMediaTimes();																		// Set media times
+
 		$("[id^=el-L]").on("click", function(e) {													// On click
  			let time=e.target.id.substring(4);														// Get index
 			if (time != "")  app.Goto(time-0+1,e.ctrlKey);											// Go to time, fudge highlight to next block 
@@ -337,54 +338,92 @@ class App  {
 			}
 		for (i=0;i<this.tPos.length;++i)	if (this.tPos[i] >= time) break;						// Find current line
 		if (i == this.tPos.length)	return;															// Not found
-		this.curLine=i-1;																			// Set line
 		$("[id^=el-L]").css("background-color","");													// Clear all
 		let y=$("#el-L"+this.tPos[i-1]).offset().top+$("#el-rawscript")[0].scrollTop;				// Position in script
 		let r=y/$("#el-rawscript")[0].scrollHeight;													// % in script
 		$("#el-rawscript").scrollTop(r*$("#el-rawscript")[0].scrollHeight-$("#el-script").height()/2+32);	// Scroll
 		$("#el-L"+this.tPos[i-1]).css("background-color","#f9f9c0");								// Highlight current line
-		app.FindMedia(i-1);																			// Find and show media in this line
+		app.FindMedia(time);																		// Find and show media 
 	}
 		
-	FindMedia(line)
+	FindMedia(time)																				// SHOW MEDIA
 	{		
-		if (this.hideMedia)			return;															// Don't show if hiding media
-		if (line == this.lastLine)	return;															// Skip if already done
-		let s=$("#el-L"+this.tPos[line]).html();													// Get text
-		s=s.match(/showMedia\((.*?)\)/i);															// Get media
-		if (s) s=s[1].replace(/'|"/g,"");															// No ' or "
-		if (s) s=s.match(/(.*?),(.*)/);																// Split
-		if (s)	app.ShowMedia(s[1],s[2]);															// Show it
-		this.lastLine=line;																			// Set last
+		let i;
+		if (app.hideMedia)	return;																	// Don't show if hiding media
+		for (i=0;i<app.mList.length-1;++i) {														// For each media element
+			if ((time >=app.mList[i].s) && (time <app.mList[i+1].s)) {								// In this one
+				trace(i)
+				if (app.lastMedia == app.mList[i].param)	return;									// Already up
+				app.ShowMedia(app.mList[i].type,app.mList[i].param);								// Show it
+				this.lastMedia=app.mList[i].param;													// Last is this	
+				}
+			}
 	}
 
-	AddMarkup(str)																				// ADD MARKUP TO LINE
+	AddMarkup(str, num)															// ADD MARKUP TO LINE
 	{
-		let i,s,g,d;
+			
+		let i,s,g,d,start,skip;
+		let tmp=str;	
+		let numChars=str.replace(/<.*?>/g,"f").length;												// Number of readable chars in line
 		if (g=str.match(/<(.*?)>/g)) {																// If a URL(s)
+			start=skip=0;																			// Reset tag  counts
 			for (i=0;i<g.length;++i) {
 				d=g[i].match(/<(.*)(http.*)>/);														// Get params
 				if (d) {																			// A URL in it
-					if (g[i].match(/\.jpg|\.jpeg|\.gif|\.png|.webp/i)) 
-						s=`<b><p title="See image" style="margin:0 0 -3px;display:inline-block;cursor:pointer;color:#990000;margin-bottom:-3px;border:1px solid #990000;border-radius:12px;padding:0 8px" onclick="app.ShowMedia('IMG','${d[2]}')">${d[1]}</p></b>`;	// Must be a MAP, add link
-					else s=`<b><p title="See site" style="margin:0 0 -3px;display:inline-block;cursor:pointer;color:#000099;margin-bottom:-3px;border:1px solid #000099;border-radius:12px;padding:0 8px" onclick="app.ShowMedia('URL','${d[2]}')">${d[1]}</p></b>`;	// Must be a MAP, add link
-					}	
-				else{
-					d=g[i].match(/<(.*)(@.*)>/);
-					if (d) 	s=`<b><p title="See map" style="margin:0 0 -3px 0;display:inline-block;cursor:pointer;color:#009900;border:1px solid #009900;border-radius:12px;padding:0 8px" onclick="app.ShowMedia('MAP','${d[2]}')">${d[1]}</p></b>`;	// Must be a MAP, add link
-					else 	return str;																// Invalid
+					if (g[i].match(/\.jpg|\.jpeg|\.gif|\.png|.webp/i)) {
+					addMedia("IMG",d[1],d[2],);													// Add media						
+					s=`<b><p title="See image" style="margin:0 0 -3px;display:inline-block;cursor:pointer;color:#990000;margin-bottom:-3px;border:1px solid #990000;border-radius:12px;padding:0 8px" onclick="app.ShowMedia('IMG','${d[2]}')">${d[1]}</p></b>`;	// Must be a IMG, add link
 					}
-				str=str.replace(g[i],s);															// Replace		
+				else{
+					addMedia("URL",d[1],d[2]);													// Add media						
+					s=`<b><p title="See site" style="margin:0 0 -3px;display:inline-block;cursor:pointer;color:#000099;margin-bottom:-3px;border:1px solid #000099;border-radius:12px;padding:0 8px" onclick="app.ShowMedia('URL','${d[2]}')">${d[1]}</p></b>`;	// Must be a URL, add link
+					}
+				}	
+			else{
+				d=g[i].match(/<(.*)(@.*)>/);
+				if (d) { 																		// If a location
+					addMedia("MAP",d[1],d[2]);													// Add media						
+					s=`<b><p title="See map" style="margin:0 0 -3px 0;display:inline-block;cursor:pointer;color:#009900;border:1px solid #009900;border-radius:12px;padding:0 8px" onclick="app.ShowMedia('MAP','${d[2]}')">${d[1]}</p></b>`;	// Must be a MAP, add link
+					}
+				else 	return str;																// Invalid
 				}
-			}	
+			str=str.replace(g[i],s);															// Replace		
+			}
+		}	
+		
 		return(str)	
+
+		function addMedia(type, tag, param) {													// ADD MEDIA TO LIST
+			let o={};
+			start=tmp.indexOf(tag,start)-skip-1;													// Chars into ta
+			skip+=param.length+2;																	// Num chars to skip
+			o.num=num;																				// Set line num
+			o.type=type;																			// Set type
+			o.param=param;																			// Set param		
+			o.pct=start/numChars;																	// Percent in line
+			start+=10;																				// Pass this tag
+			app.mList.push(o);																		// Add to media list
+		}
+	}
+
+	SetMediaTimes()
+	{
+		let i,s,e,dur;
+		for (i=0;i<this.mList.length;++i) {																// For each media
+			s=this.script[this.mList[i].num].s;															// Get start time
+			if (this.mList[i].num < this.script.length) e=this.script[this.mList[i].num+1].s;			// Get end if not last
+			else										e=this.trt;									// Use TRT is last
+			dur=e-s;
+			this.mList[i].s=this.mList[i].pct*dur+s;
+			}
 	}
 
 	Play(mode="toggle")																			// PLAY OR PAUSE
 	{
 		mode == "toggle" ? app.inPlay=!app.inPlay :	app.inPlay=mode									// Set flag
 		$("#el-play").attr("src",`img/${app.inPlay ? "pause" : "play"}but.png`);					// Flop images
-		this.lastLine=0;																			// Reset last time
+		this.lastMedia="";																			// Reset last time
 		if (app.inPlay)	app.aud.play();																// Play
 		else			app.aud.pause();															// Pause
 	}
