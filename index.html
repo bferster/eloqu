@@ -131,12 +131,14 @@
 	
 		$("#el-rawscript").scroll(()=>{														// ON SCROLL 
 			let pct=$("#el-rawscript")[0].scrollTop/$("#el-rawscript")[0].scrollHeight;		// % of scroll
-//			app.Highlight(pct*app.trt);														// Go there
+//			app.Highlight(pct*app.trt);					 									// Go there
 			});
 
-		$("body").keyup(function(e) {														// KEY DOWN HANDLER
+		$(window ).keyup(function(e) {														// KEY DOWN HANDLER
 			if (!e) return;																	// Quit if no data
-			if ((e.which == 76) && e.altKey && e.ctrlKey) 									// Show Load script (ctrl+alt+l)
+			if (e.which == 32) 																// Space
+				$("#el-play").trigger("click");												// Toggle play   
+			if ((e.which == 76) && e.altKey && e.ctrlKey) 						  			// Show Load script (ctrl+alt+l)
 				$("#el-scriptfile").css("display","inline-block");
 			});
 
@@ -339,6 +341,7 @@ class App  {
 		for (i=0;i<this.tPos.length;++i)	if (this.tPos[i] >= time) break;						// Find current line
 		if (i == this.tPos.length)	return;															// Not found
 		$("[id^=el-L]").css("background-color","");													// Clear all
+		if (!this.tPos[i-1]) return;
 		let y=$("#el-L"+this.tPos[i-1]).offset().top+$("#el-rawscript")[0].scrollTop;				// Position in script
 		let r=y/$("#el-rawscript")[0].scrollHeight;													// % in script
 		$("#el-rawscript").scrollTop(r*$("#el-rawscript")[0].scrollHeight-$("#el-script").height()/2+32);	// Scroll
@@ -352,8 +355,7 @@ class App  {
 		if (app.hideMedia)	return;																	// Don't show if hiding media
 		for (i=0;i<app.mList.length-1;++i) {														// For each media element
 			if ((time >=app.mList[i].s) && (time <app.mList[i+1].s)) {								// In this one
-				trace(i)
-				if (app.lastMedia == app.mList[i].param)	return;									// Already up
+  				if (app.lastMedia == app.mList[i].param)	return;									// Already up
 				app.ShowMedia(app.mList[i].type,app.mList[i].param);								// Show it
 				this.lastMedia=app.mList[i].param;													// Last is this	
 				}
@@ -362,7 +364,6 @@ class App  {
 
 	AddMarkup(str, num)															// ADD MARKUP TO LINE
 	{
-			
 		let i,s,g,d,start,skip;
 		let tmp=str;	
 		let numChars=str.replace(/<.*?>/g,"f").length;												// Number of readable chars in line
@@ -415,7 +416,7 @@ class App  {
 			if (this.mList[i].num < this.script.length) e=this.script[this.mList[i].num+1].s;			// Get end if not last
 			else										e=this.trt;									// Use TRT is last
 			dur=e-s;
-			this.mList[i].s=this.mList[i].pct*dur+s;
+			this.mList[i].s=this.mList[i].pct*dur+s-2;
 			}
 	}
 
