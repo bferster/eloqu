@@ -108,6 +108,7 @@
 		if (url.match(/&auto/i) && !isMobile)	app.autoPlay=true;							// Autoplay? if not mobile
 		if (url.match(/t=/)) 					app.start=url.match(/&t=(\d*)/)[1]-0;		// If time set
 
+		trace("script/"+app.name+".txt")
 		$.ajax({ url:"script/"+app.name+".txt",success:(s)=>{								// Load script
 			app.ParseScript(s);																// Parse script
 			}});																
