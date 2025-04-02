@@ -65,7 +65,7 @@
 </style>
 <body>
 	<div id="el-main" class="el-main">
-		<input type="file" id="el-scriptfile" accept=".txt,.text" style="display:none">
+		<input type="file" id="el-scriptfile" accept=".txt,.text" style="display:none;position:absolute;left:24px;top:24px;z-index:99">
 		<div id="el-script" class="el-script">
 			<div id="el-rawscript" class="el-rawscript">Transcript</div>
 			<img id="el-search" src="img/search.png" class="el-icon" style="left:16px;bottom:16px">
@@ -108,7 +108,6 @@
 		if (url.match(/&auto/i) && !isMobile)	app.autoPlay=true;							// Autoplay? if not mobile
 		if (url.match(/t=/)) 					app.start=url.match(/&t=(\d*)/)[1]-0;		// If time set
 
-		trace("script/"+app.name+".txt")
 		$.ajax({ url:"script/"+app.name+".txt",success:(s)=>{								// Load script
 			app.ParseScript(s);																// Parse script
 			}});																
